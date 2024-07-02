@@ -13,14 +13,12 @@
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <router-link to="/" class="nav-link">
-                    <!-- {{ $t("labels.home") }} -->
-                      Home
+                    {{ $t("labels.home") }}                      
                 </router-link>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <router-link to="/" class="nav-link">
-                    <!-- {{ $t("labels.contact") }} -->
-                      Contact
+                    {{ $t("labels.contact") }}                      
                 </router-link>
             </li>
         </ul>

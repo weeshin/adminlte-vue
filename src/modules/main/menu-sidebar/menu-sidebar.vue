@@ -82,11 +82,11 @@ const menu = [
         path: '/',
         children: [
             {
-                name: 'Dashboard 1',
-                path: 'dashboard1'
+                name: t('labels.dashboard1'),
+                path: 'dashboard'
             },
             {
-                name: "Dashboard 2",
+                name: t('labels.dashboard2'),
                 path: 'dashboard2'
             }
         ]
@@ -96,7 +96,7 @@ const menu = [
         path: '/blank'
     },
     {
-        name: 'Main',
+        name: 'Layout Options',
         children: [
             {
                 name: 'sub-menu',
@@ -111,7 +111,7 @@ const menu = [
 ];
 
 const currentUser = computed(() => {    
-    return {"email": "user@demo.com"};
+    return {"email": "Alexander Pierce"};
 });
 
 const sidebarSkin = computed(() => store.getters['ui/sidebarSkin']);

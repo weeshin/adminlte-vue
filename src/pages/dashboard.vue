@@ -4,17 +4,17 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">                
-                <h1 class="m-0">28 Jun 2024 20:30:23</h1>
+                <h1 class="m-0">{{ $t('labels.dashboard') }}</h1>
             </div>
             <!-- /.col -->
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item">
                         <router-link to="/"
-                            >Home</router-link
+                            >{{ $t('labels.home') }}</router-link
                         >
                     </li>
-                    <li class="breadcrumb-item active">Dashboard</li>
+                    <li class="breadcrumb-item active">{{ $t('labels.dashboard') }}</li>
                 </ol>
             </div>
             <!-- /.col -->
@@ -36,13 +36,13 @@
                     <div class="inner">
                         <h3>150</h3>
 
-                        <p>New Orders</p>
+                        <p>{{ $t('labels.newOrders') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-bag"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
-                        >More info <i class="fas fa-arrow-circle-right"></i
+                        >{{ $t('labels.moreInfo') }} <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
             </div>
@@ -53,13 +53,13 @@
                     <div class="inner">
                         <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                        <p>Bounce Rate</p>
+                        <p>{{ $t('labels.bounceRate') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-stats-bars"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
-                        >More info <i class="fas fa-arrow-circle-right"></i
+                        >{{ $t('labels.moreInfo') }} <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
             </div>
@@ -70,13 +70,13 @@
                     <div class="inner">
                         <h3>44</h3>
 
-                        <p>User Registrations</p>
+                        <p>{{ $t('labels.userRegistrations') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-person-add"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
-                        >More info <i class="fas fa-arrow-circle-right"></i
+                        >{{ $t('labels.moreInfo') }} <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
             </div>
@@ -87,13 +87,13 @@
                     <div class="inner">
                         <h3>65</h3>
 
-                        <p>Unique Visitors</p>
+                        <p>{{ $t('labels.uniqueVisitors') }}</p>
                     </div>
                     <div class="icon">
                         <i class="ion ion-pie-graph"></i>
                     </div>
                     <router-link to="/" class="small-box-footer"
-                        >More info <i class="fas fa-arrow-circle-right"></i
+                        >{{ $t('labels.moreInfo') }} <i class="fas fa-arrow-circle-right"></i
                     ></router-link>
                 </div>
             </div>
