@@ -57,6 +57,7 @@
 <script>
 import MenuItem from '@/components/menu-item.vue';
 import {Image} from '@profabric/vue-components';
+import path from 'path';
 
 export default {
   components: {
@@ -76,7 +77,17 @@ const store = useStore();
 const menu = [
     {
         name: 'Dashboard',
-        path: '/'
+        path: '/',
+        children: [
+            {
+                name: 'Dashboard 1',
+                path: 'dashboard1'
+            },
+            {
+                name: "Dashboard 2",
+                path: 'dashboard2'
+            }
+        ]
     },
     {
         name: 'Blank',
