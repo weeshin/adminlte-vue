@@ -16,6 +16,7 @@
     "@profabric/vue-components": "^0.2.4",
     "vue": "^3.4.29",
     "vue-facing-decorator": "^3.0.4",
+    "vue-i18n": "^9.13.1",
     "vue-router": "^4.4.0",
     "vue-toastification": "2.0.0-rc.5",
     "vuex": "4.1.0"
@@ -30,6 +31,7 @@
     "sass": "^1.77.6",
     "typescript": "^5.2.2",
     "vite": "^5.3.1",
+    "vue-jest": "^3.0.7",
     "vue-tsc": "^2.0.21"
   }
 }
