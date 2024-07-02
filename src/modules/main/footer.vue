@@ -2,8 +2,8 @@
 <footer class="main-footer">    
     <strong>
         <span>Copyright &copy; 2024</span>
-        <a href="https://er.com" target="_blank" rel="noopener noreferrer">
-            <span>&nbsp;er.com</span>
+        <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+            <span>&nbsp;github.com</span>
         </a>
         <span>.</span>
     </strong>    
