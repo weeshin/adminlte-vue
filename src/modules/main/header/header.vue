@@ -5,6 +5,7 @@
         class="main-header navbar navbar-expand"
         :class="navbarVariant"
     >
+        <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
                 <button class="nav-link" role="button" @click="onToggleMenuSidebar">
@@ -23,6 +24,7 @@
             </li>
         </ul>
 
+        <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">            
             <messages></messages>
             <notifications ></notifications>        
