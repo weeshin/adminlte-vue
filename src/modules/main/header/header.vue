@@ -25,7 +25,8 @@
         </ul>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">            
+        <ul class="navbar-nav ml-auto">
+            <search></search>
             <messages></messages>
             <notifications ></notifications>        
             <!--<languages-dropdown></languages-dropdown>-->
@@ -35,11 +36,7 @@
                     <i class="fas fa-th-large"></i>
                 </button>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-                <i class="fas fa-expand-arrows-alt"></i>
-                </a>
-            </li>
+            <fullscreen></fullscreen>
         </ul>
     </nav>
 </template>
@@ -50,6 +47,8 @@ import { useStore } from 'vuex';
 import Messages from './messages.vue';
 import notifications from './notifications.vue';
 import User from './user.vue';
+import Search from './search.vue';
+import Fullscreen from './fullscreen.vue';
 
 const store = useStore();
 
