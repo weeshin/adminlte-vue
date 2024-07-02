@@ -1,0 +1,23 @@
+{
+    "labels": {
+        "dashboard": "仪表板",
+        "dashboard1": "仪表板 1",
+        "dashboard2": "仪表板 2",
+        "blank": "空白",
+        "home": "主页",
+        "contact": "联系",
+        "newOrders": "新订单",
+        "bounceRate": "跳出率",
+        "userRegistrations": "用户注册",
+        "uniqueVisitors": "独特访客",
+        "moreInfo": "更多信息"
+    },
+    "messages": {
+        "passwordError": "您的密码无效。"
+    },
+    "languages": {
+        "english": "English",
+        "chinese": "中文",
+        "malay": "Malay"
+    }
+}

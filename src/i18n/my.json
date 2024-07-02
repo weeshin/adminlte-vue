@@ -1,6 +1,18 @@
 {
     "labels": {
-        "dashboard": "Papan pemuka",
-        "blank": "Kosong"
+        "dashboard": "Papan Pemuka",
+        "dashboard1": "Papan Pemuka 1",
+        "dashboard2": "Papan Pemuka 2",
+        "blank": "Kosong",
+        "home": "Rumah",
+        "contact": "Hubungi"
+    },
+    "messages": {
+        "passwordError": "Kata laluan anda tidak sah."
+    },
+    "languages": {
+        "english": "English",
+        "chinese": "中文",
+        "malay": "Malay"
     }
 }
