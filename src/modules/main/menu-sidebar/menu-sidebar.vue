@@ -71,12 +71,14 @@ export default {
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 
 const store = useStore();
+const { t, locale } = useI18n();
 
 const menu = [
     {
-        name: 'Dashboard',
+        name: t('labels.dashboard'),
         path: '/',
         children: [
             {
@@ -90,7 +92,7 @@ const menu = [
         ]
     },
     {
-        name: 'Blank',
+        name: t('labels.blank'),
         path: '/blank'
     },
     {
