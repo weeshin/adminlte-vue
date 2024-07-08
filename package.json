@@ -10,11 +10,11 @@
   "exports": {
     ".": {
       "main": "./dist/adminlte-vue3.umd.min.js",
-      "module": "./dist/adminlte-vue3.esm-browser.js"
+      "module": "./dist/adminlte-vue3.es.min.js"
     }
   },
   "main": "./dist/adminlte-vue3.umd.min.js",
-  "module": "./dist/adminlte-vue3.esm-browser.js",
+  "module": "./dist/adminlte-vue3.es.min.js",
   "files": [
     "dist/*",
     "src/*"
