@@ -15,6 +15,10 @@
   },
   "main": "./dist/adminlte-vue3.umd.min.js",
   "module": "./dist/adminlte-vue3.esm-browser.js",
+  "files": [
+    "dist/*",
+    "src/*"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
