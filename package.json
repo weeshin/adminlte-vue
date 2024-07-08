@@ -9,12 +9,12 @@
   ],
   "exports": {
     ".": {
-      "main": "./dist/adminlte-vue3.umd.min.js",
-      "module": "./dist/adminlte-vue3.es.min.js"
+      "import": "./dist/adminlte-vue3.esm-browser.js",
+      "require": "./dist/adminlte-vue3.umd.min.js"
     }
   },
   "main": "./dist/adminlte-vue3.umd.min.js",
-  "module": "./dist/adminlte-vue3.es.min.js",
+  "module": "./dist/adminlte-vue3.esm-browser.js",
   "files": [
     "dist/*",
     "src/*"
