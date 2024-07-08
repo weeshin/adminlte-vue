@@ -64,7 +64,7 @@ const onToggleControlSidebar = () => {
     console.log("onToggleControlSidebar");
 };
 
-const darkModeSelected = computed(() => store.getters['ui/darkModeSelected']);
+// const darkModeSelected = computed(() => store.getters['ui/darkModeSelected']);
 const navbarVariant = computed(() => store.getters['ui/nabarVariant']);
 
 onMounted(async ()=> {

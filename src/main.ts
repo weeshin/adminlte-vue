@@ -14,7 +14,7 @@ import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 library.add(faEnvelope, faLock);
 
 const app = createApp(App);
-app.component('font-awesome-icon', FontAwesomeIcon)
+app.component('font-awesome-icon', FontAwesomeIcon)   
     .use(store)
     .use(router)
     .use(i18n);

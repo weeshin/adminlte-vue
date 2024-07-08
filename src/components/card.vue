@@ -6,10 +6,10 @@
             <slot name="card-tools">
                 <div class="card-tools">
                     <span class="badge badge-danger" v-if="badge">{{ badge }}</span>
-                    <button type="button" class="btn btn-tool" @click="toggleCardBody">
+                    <button type="button" class="btn btn-tool" @click="toggleCardBody" v-if="toolsBtn === 'on'">
                         <i :class="isCardBodyVisible ? 'fas fa-minus' : 'fas fa-plus'"></i>
                     </button>
-                    <button type="button" class="btn btn-tool" @click="closeCard">
+                    <button type="button" class="btn btn-tool" @click="closeCard" v-if="toolsBtn ==='on'">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>        
@@ -30,13 +30,15 @@
     <script setup lang="ts">
     import { ref, defineProps, withDefaults } from 'vue';
     
-    const props = withDefaults(
+    withDefaults(
         defineProps<{
             title?: string;
             badge?: string;
+            toolsBtn?: string;
         }>(), 
         {
-            title: 'This is title'        
+            title: 'This is title',
+            toolsBtn: "on"
         }
     );
     

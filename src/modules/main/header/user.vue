@@ -52,7 +52,7 @@
             <router-link
                 to="/profile"
                 class="btn btn-default btn-flat"
-                @click="isDropdownOpened = false;"
+                @click="isDropdownOpened"
             >
                 profile
             </router-link>
@@ -82,10 +82,17 @@ export default {
 </script>
 
 <script setup lang="ts">
+const authentication = {
+    photoURL: ''
+};
 
 const logout = async () => {
     console.log('logout');
-}
+};
+
+const isDropdownOpened = () => {
+    return false;
+};
 </script>
 
 <style scoped>

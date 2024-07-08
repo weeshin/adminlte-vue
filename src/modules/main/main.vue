@@ -82,12 +82,13 @@ onMounted(async ()=> {
   appElement.value.classList.add('layout-fixed');
 });
 
-onUnmounted(() => {
+onUnmounted(async () => {
+  appElement.value = document.getElementById('app') as HTMLElement;
   appElement.value.classList.remove('sidebar-mini');
   appElement.value.classList.remove('layout-fixed');
 });
 
-const toggleMenuSidebar = () => {
-  store.getters['ui/toggleMenuSidebar'];
-};
+// const toggleMenuSidebar = () => {
+//   store.getters['ui/toggleMenuSidebar'];
+// };
 </script>

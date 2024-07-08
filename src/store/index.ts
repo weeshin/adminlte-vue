@@ -1,4 +1,4 @@
-import { createStore } from 'vuex';
+import { createStore } from "vuex";
 import uiModule from './ui';
 
 export default createStore({

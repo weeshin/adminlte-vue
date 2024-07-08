@@ -54,10 +54,9 @@
     </aside>
 </template>
 
-<script>
+<script lang="ts">
 import MenuItem from '@/components/menu-item.vue';
 import {Image} from '@profabric/vue-components';
-import path from 'path';
 
 export default {
   components: {
@@ -68,13 +67,13 @@ export default {
 
 </script>
 
-<script setup>
-import { ref, onMounted, computed } from 'vue';
-import { useStore } from 'vuex';
+<script setup lang="ts">
+import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useStore } from 'vuex';
 
 const store = useStore();
-const { t, locale } = useI18n();
+const { t } = useI18n();
 
 const menu = [
     {
@@ -111,7 +110,7 @@ const menu = [
 ];
 
 const currentUser = computed(() => {    
-    return {"email": "Alexander Pierce"};
+    return {"email": "Alexander Pierce", "photoURL": ""};
 });
 
 const sidebarSkin = computed(() => store.getters['ui/sidebarSkin']);

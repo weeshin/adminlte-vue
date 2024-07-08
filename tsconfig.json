@@ -1,11 +1,24 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
+    "compilerOptions": {
+      "target": "esnext",
+      "module": "esnext",      
+      "moduleResolution": "node",
+      "strict": true,
+      "jsx": "preserve",
+      "resolveJsonModule": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true,
+      "lib": ["esnext", "dom", "dom.iterable"],
+      "types": ["node", "jest"],
+      "typeRoots": ["./node_modules/@types", "./src/types"],
+      "baseUrl": "./",
+      "paths": {
+        "@/*": ["src/*"]
+      },
+      "importHelpers": true // Add this line
     },
-    {
-      "path": "./tsconfig.node.json"
-    }
-  ]
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "shims-vue.d.ts"],
+    "exclude": ["node_modules"]
 }
+  

@@ -100,9 +100,28 @@
             <!-- ./col -->
         </div>
         <!-- /.row -->
+
+        <div class="row">
+            <div class="col-6 col-lg-6">
+                <DualListbox availableItemTitle="Available Items" selectedItemTitle="Selected"
+                    v-model:availableItems="availableItems" v-model:selectedItems="selectedItems"></DualListbox>
+            </div>            
+            <div class="col-6 col-lg-6">
+                
+            </div>
+        </div>
     </div>
     <!-- /.container-fluid -->
 </section>
 <!-- /.content -->
 
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+import DualListbox from '@/components/dual-listbox.vue';
+
+
+const availableItems = ref(['Policy 1', 'Policy 2', 'Policy 3', 'Policy 4', 'Policy 5']);
+const selectedItems = ref(['Policy 6', 'Policy 7', 'Policy 8']);
+</script>
