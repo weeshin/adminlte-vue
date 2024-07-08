@@ -7,6 +7,14 @@
     "vue",
     "components"
   ],
+  "exports": {
+    ".": {
+      "main": "./dist/adminlte-vue3.umd.min.js",
+      "module": "./dist/adminlte-vue3.esm-browser.js"
+    }
+  },
+  "main": "./dist/adminlte-vue3.umd.min.js",
+  "module": "./dist/adminlte-vue3.esm-browser.js",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
