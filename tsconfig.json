@@ -10,7 +10,7 @@
       "skipLibCheck": true,
       "esModuleInterop": true,
       "forceConsistentCasingInFileNames": true,      
-      "types": ["node", "jest"],
+      "types": ["node", "jest", "cypress", "./cypress/support/cypress.d.ts"],
       "typeRoots": ["./node_modules/@types", "./src/types"],
       "sourceMap": false,
       "baseUrl": "./",
@@ -27,7 +27,8 @@
       "src/**/*.tsx", 
       "tests/**/*.ts",
       "tests/**/*.tsx",
-      "shims-vue.d.ts"
+      "shims-vue.d.ts",
+      "cypress/**/*.ts"
     ],
     "exclude": ["node_modules"]
 }
