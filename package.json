@@ -1,7 +1,7 @@
 {
   "name": "adminlte-vue3",
   "private": false,
-  "version": "0.1.11",
+  "version": "0.1.12",
   "type": "module",
   "keywords": [
     "vue",
@@ -16,7 +16,9 @@
   "types": "./dist/adminlte-vue3.d.ts",
   "main": "./dist/adminlte-vue3.umd.cjs",
   "module": "./dist/adminlte-vue3.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --emitDeclarationOnly && vite build",
