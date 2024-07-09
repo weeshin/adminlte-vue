@@ -20,16 +20,17 @@ export default defineConfig(({mode }) => {
       outDir: 'dist',
       lib: {
         entry: path.resolve(__dirname, './src/components/index.ts'),
-        name: 'AdminLteVue3',        
-        fileName: (format) => {
-          if (format === 'es') {
-            return `adminlte-vue3.esm-browser.js`;
-          }
-          if (format === 'umd') {
-            return `adminlte-vue3.umd.min.js`;
-          }
-          return `adminlte-vue3.${format}.js`
-        },
+        name: 'AdminLteVue3',     
+        fileName: "adminlte-vue3",   
+        // fileName: (format) => {
+        //   if (format === 'es') {
+        //     return `adminlte-vue3.esm-browser.js`;
+        //   }
+        //   if (format === 'umd') {
+        //     return `adminlte-vue3.umd.min.js`;
+        //   }
+        //   return `adminlte-vue3.${format}.js`
+        // },
       },
       rollupOptions: {
         external: ['vue'],

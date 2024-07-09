@@ -9,19 +9,17 @@
   ],
   "exports": {
     ".": {
-      "import": "./dist/adminlte-vue3.esm-browser.js",
-      "require": "./dist/adminlte-vue3.umd.min.js"
+      "import": "./dist/adminlte-vue3.js",
+      "require": "./dist/adminlte-vue3.umd.cjs"
     }
   },
-  "main": "./dist/adminlte-vue3.umd.min.js",
-  "module": "./dist/adminlte-vue3.esm-browser.js",
-  "files": [
-    "dist/*",
-    "src/*"
-  ],
+  "types": "./dist/adminlte-vue3.d.ts",
+  "main": "./dist/adminlte-vue3.umd.cjs",
+  "module": "./dist/adminlte-vue3.js",
+  "files": ["dist"],
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": "vue-tsc --emitDeclarationOnly && vite build",
     "preview": "vite preview",
     "test": "vitest",
     "cypress:open": "cypress open",

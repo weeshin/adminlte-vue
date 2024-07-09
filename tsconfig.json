@@ -19,7 +19,8 @@
       },
       "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
       "resolveJsonModule": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "declaration": true
     },
     "include": [
       "src/**/*.ts", 
@@ -29,6 +30,6 @@
       "tests/**/*.tsx",
       "shims-vue.d.ts"
     ],
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules", "src/app/App.vue", "src/main.ts"]
 }
   
