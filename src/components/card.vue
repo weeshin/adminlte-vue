@@ -28,15 +28,18 @@
 </template>
     
 <script setup lang="ts">
-import { ref, defineProps, withDefaults } from 'vue';
+import { ref, defineProps, PropType } from 'vue';
 const props = defineProps({
     title: {
-        type: String,
-        default: 'This is title'
+        type: String as PropType<string>,
+        required: true
     },
-    badge: String,
+    badge: {
+        type: String as PropType<string>,
+        default: ''
+    },
     toolsBtn: {
-        type: String,
+        type: String as PropType<string>,
         default: 'on'
     }
 });

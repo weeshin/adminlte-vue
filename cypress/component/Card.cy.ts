@@ -1,16 +1,19 @@
+import { mount } from '@cypress/vue';
 import Card from '../../src/components/card.vue';
 
 describe('Card.vue', () => {
   it('renders props.title when passed', () => {
-    cy.mount(Card, {
-      props: { title: 'Test Title' },
+    const theTitle = 'Test Title';    
+    const myProps = { title: theTitle };
+    mount(Card, {
+      props: myProps,
     });
 
-    cy.get('.card-title').should('contain', 'Test Title');
+    cy.get('.card-title').should('contain', theTitle);
   });
 
   it('toggles card body visibility when button is clicked', () => {
-    cy.mount(Card);
+    mount(Card);
 
     cy.get('.card-body').should('be.visible');
     cy.get('.btn-tool').first().click();
@@ -18,7 +21,7 @@ describe('Card.vue', () => {
   });
 
   it('closes the card when the close button is clicked', () => {
-    cy.mount(Card);
+    mount(Card);
 
     cy.get('.card').should('be.visible');
     cy.get('.btn-tool').last().click();    
