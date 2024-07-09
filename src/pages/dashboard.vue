@@ -107,7 +107,7 @@
                     v-model:availableItems="availableItems" v-model:selectedItems="selectedItems"></DualListbox>
             </div>            
             <div class="col-6 col-lg-6">
-                
+                <Card></Card>
             </div>
         </div>
     </div>
@@ -119,6 +119,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import Card from '@/components/card.vue';
 import DualListbox from '@/components/dual-listbox.vue';
 
 

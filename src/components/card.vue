@@ -25,31 +25,30 @@
         </div>
         <!-- /.card-footer -->
     </div>
-    </template>
+</template>
     
-    <script setup lang="ts">
-    import { ref, defineProps, withDefaults } from 'vue';
-    
-    withDefaults(
-        defineProps<{
-            title?: string;
-            badge?: string;
-            toolsBtn?: string;
-        }>(), 
-        {
-            title: 'This is title',
-            toolsBtn: "on"
-        }
-    );
-    
-    const isCardVisible = ref(true);
-    const isCardBodyVisible = ref(true);
-    
-    const toggleCardBody = () => {
-        isCardBodyVisible.value = !isCardBodyVisible.value;
+<script setup lang="ts">
+import { ref, defineProps, withDefaults } from 'vue';
+const props = defineProps({
+    title: {
+        type: String,
+        default: 'This is title'
+    },
+    badge: String,
+    toolsBtn: {
+        type: String,
+        default: 'on'
     }
-    
-    const closeCard = () => {
-        isCardVisible.value = false;
-    }
-    </script>
+});
+
+const isCardVisible = ref(true);
+const isCardBodyVisible = ref(true);
+
+const toggleCardBody = () => {
+    isCardBodyVisible.value = !isCardBodyVisible.value;
+}
+
+const closeCard = () => {
+    isCardVisible.value = false;
+}
+</script>
