@@ -9,6 +9,7 @@
   ],
   "exports": {
     ".": {
+      "types": "./dist/adminlte-vue3.d.ts",
       "import": "./dist/adminlte-vue3.js",
       "require": "./dist/adminlte-vue3.umd.cjs"
     }
