@@ -48,7 +48,7 @@ import Messages from './messages.vue';
 import notifications from './notifications.vue';
 import User from './user.vue';
 import Search from './search.vue';
-import Fullscreen from './fullscreen.vue';
+import Fullscreen from '@components/FullscreenButton.vue';
 
 const store = useStore();
 
