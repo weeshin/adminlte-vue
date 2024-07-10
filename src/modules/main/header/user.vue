@@ -1,28 +1,26 @@
 <template>
 
-<pf-dropdown hideArrow class="user-menu">
+<dropdown hideArrow>
     <div slot="head">
-        <pf-image
-            :src="authentication && authentication.photoURL"
+        <image            
             fallbackSrc="assets/img/default-profile.png"
             class="user-image-small"
-            width="25"
-            height="25"
+            :width="25"
+            :height="25"
             alt="User Image"
             rounded
-        ></pf-image>
+        ></image>
     </div>
     <div slot="body">
         <li class="user-header bg-primary">
-            <pf-image
-                :src="authentication && authentication.photoURL"
+            <image                
                 fallbackSrc="assets/img/default-profile.png"
                 class="user-image-big"
                 alt="User Image"
-                width="90"
-                height="90"
+                :width="90"
+                :height="90"
                 rounded
-            ></pf-image>
+            ></image>
 
             <p>
                 <span>Email: user@demo.com</span>
@@ -51,20 +49,18 @@
         <li class="user-footer">
             <router-link
                 to="/profile"
-                class="btn btn-default btn-flat"
-                @click="isDropdownOpened"
+                class="btn btn-default btn-flat"                
             >
                 profile
             </router-link>
-            <button
-                @click="logout"
+            <button                
                 class="btn btn-default btn-flat float-right"
             >
                 sign out
             </button>
         </li>
     </div>
-</pf-dropdown>
+</dropdown>
 
 
 </template>
@@ -78,22 +74,21 @@ export default {
     'pf-image': Image
   },
 };
-
 </script>
 
-<script setup lang="ts">
-const authentication = {
-    photoURL: ''
-};
+<!-- <script setup lang="ts">
+// const authentication = {
+//     photoURL: ''
+// };
 
-const logout = async () => {
-    console.log('logout');
-};
+// const logout = async () => {
+//     console.log('logout');
+// };
 
-const isDropdownOpened = () => {
-    return false;
-};
-</script>
+// const isDropdownOpened = () => {
+//     return false;
+// };
+</script> -->
 
 <style scoped>
 pf-dropdown {

@@ -1,6 +1,6 @@
 <template>
 
-<pf-dropdown hideArrow >
+<dropdown hideArrow >
     <div slot="head">
         <i class="far fa-comments"></i>
         <span class="badge badge-danger navbar-badge">4</span>
@@ -8,14 +8,14 @@
     <div slot="body">
         <a href="#" class="dropdown-item">
             <div class="media">
-                <pf-image
+                <image
                     src="assets/img/default-profile.png"
                     alt="User Avatar"
                     width="50"
                     height="50"
                     class="mr-2"
                     rounded
-                ></pf-image>
+                ></image>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
                         Brad Diesel
@@ -33,14 +33,14 @@
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
             <div class="media">
-                <pf-image
+                <image
                     src="assets/img/default-profile.png"
                     alt="User Avatar"
                     class="mr-2"
-                    width="50"
-                    height="50"
+                    :width="50"
+                    :height="50"
                     rounded
-                ></pf-image>
+                ></image>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
                         John Pierce
@@ -58,14 +58,14 @@
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item">
             <div class="media">
-                <pf-image
+                <image
                     src="assets/img/default-profile.png"
                     alt="User Avatar"
                     class="mr-2"
-                    width="50"
-                    height="50"
+                    :width="50"
+                    :height="50"
                     rounded
-                ></pf-image>
+                ></image>
                 <div class="media-body">
                     <h3 class="dropdown-item-title">
                         Nora Silvester
@@ -83,7 +83,7 @@
         <div class="dropdown-divider"></div>
         <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
     </div>
-</pf-dropdown>
+</dropdown>
 
 </template>
 
