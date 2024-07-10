@@ -10,7 +10,11 @@
         "bounceRate": "Bounce Rate",
         "userRegistrations": "User Registrations",
         "uniqueVisitors": "Unique Visitors",
-        "moreInfo": "More Info"
+        "moreInfo": "More Info"     
+    },
+    "footer": {
+        "copyright": "Copyright",
+        "version": "Version"
     },
     "messages": {
         "passwordError": "Your password is invalid."

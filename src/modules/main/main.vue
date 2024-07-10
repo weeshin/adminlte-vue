@@ -5,13 +5,13 @@
         <div class="content-wrapper">        
             <router-view></router-view>
         </div>
-        <app-footer></app-footer>
+        <app-footer version="v1.0" shortname="AdminLTE-Vue3.io"></app-footer>
     </div>
 </template>
 
 <script lang="ts">
 import Header from './header/header.vue';
-import Footer from './footer.vue';
+import Footer from '@components/Footer.vue';
 import MenuSidebar from './menu-sidebar/menu-sidebar.vue';
 
 export default {
