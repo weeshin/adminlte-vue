@@ -10,7 +10,8 @@
         "bounceRate": "跳出率",
         "userRegistrations": "用户注册",
         "uniqueVisitors": "独特访客",
-        "moreInfo": "更多信息"
+        "moreInfo": "更多信息",
+        "maps": "地圖"
     },
     "messages": {
         "passwordError": "您的密码无效。"

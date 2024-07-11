@@ -38,6 +38,7 @@
 		"axios": "^1.7.2",
 		"bootstrap": "^3.3.7",
 		"chart.js": "^4.4.3",
+		"leaflet": "^1.9.4",
 		"vue": "^3.4.29",
 		"vue-facing-decorator": "^3.0.4",
 		"vue-i18n": "^9.13.1",
