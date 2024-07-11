@@ -43,13 +43,20 @@
 <script setup lang="ts">
 import { defineProps } from 'vue';
 
+interface Message {
+  image: string;
+  caller: string;
+  short_message: string;
+  time: string;
+}
+
 defineProps({
    totalMessages: {
     type: String,
     required: true
    },
    messages: {
-    type: Array,
+    type: Array<Message>,
     required: false
    }
 });

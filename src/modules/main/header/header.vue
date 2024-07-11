@@ -71,7 +71,14 @@ const onToggleControlSidebar = () => {
 // const darkModeSelected = computed(() => store.getters['ui/darkModeSelected']);
 const navbarVariant = computed(() => store.getters['ui/nabarVariant']);
 
-const messages = ref({});
+interface Message {
+  total: string;
+  messages: any[];  
+}
+const messages = ref<Message>({
+    total: '',
+    messages: []
+});
 onMounted(async ()=> {
     headerElement.value = document.getElementById('main-header') as HTMLElement;
 
