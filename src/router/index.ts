@@ -4,6 +4,7 @@ import Main from '@/modules/main/main.vue';
 import Dashboard from '@/pages/dashboard.vue';
 import Dashboard2 from '@/pages/dashboard2.vue';
 import Maps from '@pages/Maps.vue';
+import Tables from '@pages/Tables.vue';
 
 const routes: Array<RouteRecordRaw> = [  
     {
@@ -28,6 +29,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'maps',
                 component: Maps
+            },
+            {
+                path: 'tables',
+                component: Tables
             }
         ]
     }  

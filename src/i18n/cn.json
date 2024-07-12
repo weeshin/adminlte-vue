@@ -13,6 +13,10 @@
         "moreInfo": "更多信息",
         "maps": "地圖"
     },
+    "actionableDataTable": {
+        "create": "Create",
+        "search": "Search"
+    },   
     "messages": {
         "passwordError": "您的密码无效。"
     },

@@ -95,8 +95,8 @@ const menu = [
         path: '/maps'
     },    
     {
-        name: t('labels.blank'),
-        path: '/blank'
+        name: t('labels.tables'),
+        path: '/tables'
     },
     {
         name: 'Layout Options',

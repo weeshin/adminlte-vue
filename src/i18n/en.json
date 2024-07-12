@@ -13,6 +13,10 @@
         "moreInfo": "More Info",
         "maps": "Maps"
     },
+    "actionableDataTable": {
+        "create": "Create",
+        "search": "Search"
+    },
     "footer": {
         "copyright": "Copyright",
         "version": "Version"
