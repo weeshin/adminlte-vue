@@ -91,6 +91,10 @@ const menu = [
         ]
     },
     {
+        name: t('labels.maps'),
+        path: '/maps'
+    },    
+    {
         name: t('labels.blank'),
         path: '/blank'
     },
