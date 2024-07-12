@@ -16,7 +16,7 @@
 import { ref, onMounted } from 'vue';
 import Map from '@components/Map.vue';
 
-const presetData = [
+const presetData: [number, number][] = [
   [3.2690515637244513, 101.65283525496457],
   [3.271960009172302, 101.65429184988885],
   [3.275110815549323, 101.65186419168171],
@@ -60,9 +60,9 @@ const presetData = [
   [3.1354404448270903, 101.72224452904476]
 ];
 
-const routes = ref([]);
+const routes = ref<[number, number][]>([]);
 
-const addNewLocation = (lat, lng) => {
+const addNewLocation = (lat: number, lng: number) => {
   routes.value.push([lat, lng]);
 };
 

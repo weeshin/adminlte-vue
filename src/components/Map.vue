@@ -17,7 +17,7 @@ const props = defineProps({
   }
 });
 
-const map = ref<L.Map | null>(null);
+const map = ref<L.Map>();
 const vehicleMarker = ref<L.Marker | null>(null);
 const pathLine = ref<L.Polyline | null>(null);
 
@@ -28,6 +28,10 @@ const vehicleIcon = L.icon({
 });
 
 const initializeMap = () => {
+  if (map.value) {
+    map.value.remove(); // Remove the existing map instance
+  }
+  
   map.value = L.map('map').setView([3.1390, 101.6869], 13);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -55,16 +59,6 @@ watch(props.routes, (newRoutes) => {
     const [lat, lng] = newRoutes[newRoutes.length - 1];
     updateVehiclePosition(lat, lng);
   }
-  // let index = 0;
-  // const interval = setInterval(() => {
-  //   if (index < newRoutes.length) {
-  //     const [lat, lng] = newRoutes[index];
-  //     updateVehiclePosition(lat, lng);
-  //     index++;
-  //   } else {
-  //     clearInterval(interval);
-  //   }
-  // }, 1000); // Update every second
 }, { immediate: true });
 
 onMounted(() => {
