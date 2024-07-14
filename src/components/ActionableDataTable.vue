@@ -12,7 +12,7 @@
                 <Card :title="title">
                     <template #card-tools>
                         <div class="card-tools">
-                            <button type="button" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em" @click="showModal">
+                            <button type="button" class="btn btn-info text-uppercase" style="letter-spacing: 0.1em" @click="showCreateModal">
                                 <i class="fas fa-cog"></i> {{ $t('actionableDataTable.create') }}
                             </button>
                         </div>                        
@@ -34,16 +34,16 @@
                         </thead>
                         <tbody>
                             <tr v-for="(item, index) in paginatedItems" :key="item.id">
-                                <td v-for="(colName, index) in columnNames" :key="index">
+                                <td v-for="(colName, colIndex) in columnNames" :key="colIndex">
                                     {{ item[colName] }}
                                 </td>                                
                                 <td class="text-right">
                                     <button class="btn btn-primary text-uppercase" style="letter-spacing: 0.1em;"
-                                        @click="editModal(user)">
+                                        @click="showEditModal(item)">
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                                        @click="deleteItem(user)">
+                                        @click="deleteItem(item)">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -90,17 +90,22 @@
             <div class="modal-body overflow-hidden">
                     <div class="card card-primary">
                         <form @submit.prevent="submitForm">
-                            <div class="card-body">
+                            <div class="card-body">                                
                                 <div v-for="field in config.fields" :key="field.model" class="form-group">
                                     <label :for="field.model" class="h4">{{ field.label }}</label>
-                                    <component
-                                        :is="getComponent(field.type)"
+                                    <input
+                                        v-if="field.type === 'text' || field.type === 'email' || field.type === 'password'"
+                                        :type="field.type"
                                         v-model="formData[field.model]"
-                                        :field="field"
-                                        class="form-control"
                                         :id="field.model"
-                                    ></component>
-                                </div>                                  
+                                        class="form-control"
+                                    />
+                                    <select v-if="field.type === 'select'" v-model="formData[field.model]" :id="field.model" class="form-control">
+                                        <option v-for="option in field.options" :key="option.value" :value="option.value">
+                                        {{ option.text }}
+                                        </option>
+                                    </select>
+                                </div>                                 
                             </div>
                             <div class="modal-footer justify-content-between">
                                 <button type="button" class="btn btn-danger text-uppercase"
@@ -122,23 +127,30 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, onMounted, defineProps } from 'vue';
+import { ref, reactive, computed, onMounted, defineProps, watch } from 'vue';
 import Card from '@components/card.vue';
-import { FormConfig, FormField } from './FormConfig.ts';
+import { FormConfig, FormField } from '../components/FormConfig';
 
 const props = defineProps<{ 
     config: FormConfig,
-    title: String,
-    modalTitle: String,
-    columnNames: Array<String>,
-    data: Array<any>,
+    title: string,
+    modalTitle: string,
+    columnNames: string[],
+    data: Record<string, any>[],
+    onSubmit: (data: Record<string, any>) => void
 }>();
 
-const formData = ref<Record<string, any>>({});
+const formData = reactive<Record<string, any>>({});
 
-props.config.fields.forEach((field: FormField) => {
-    formData.value[field.model] = 'aa';
-});
+
+// Initialize formData with default values from config
+const initializeFormData = () => {
+  props.config.fields.forEach((field: FormField) => {
+    formData[field.model] = '';
+  });
+};
+
+initializeFormData();
 
 const getComponent = (type: string) => {
   switch (type) {
@@ -154,20 +166,16 @@ const getComponent = (type: string) => {
 };
 
 
-const submitForm = () => {
-    console.log('Form submitted with:', formData.value);
+const submitForm = () => {    
+    props.onSubmit(formData);
 };
 
-// const form = reactive({
-//     id: '',
-//     username: '',
-//     errors: {
-//         username: ''
-//     }
-// });
 
 const isModalVisible = ref(false);
-const showModal = () => {
+const modalTitle = ref(props.modalTitle);
+
+const showModal = (title: string) => {
+    modalTitle.value = title;
     isModalVisible.value = true;
 };
 
@@ -176,12 +184,26 @@ const hideModal = () => {
     resetForm();
 };
 
-const deleteItem = (user) => {
-  console.log('Deleting user:', user);
+const showCreateModal = () => {
+  resetForm();
+  showModal('Create New Entry');
 };
+
+const showEditModal = (item: Record<string, any>) => {
+  Object.keys(item).forEach((key) => {
+    formData[key] = item[key];
+  });
+  showModal('Edit Entry');
+};
+
+const deleteItem = (item: any) => {
+  console.log('Deleting item:', item);
+};
+
 const resetForm = () => {
-//   form.username = '';
-//   form.errors.username = '';
+  Object.keys(formData).forEach(key => {
+    formData[key] = '';
+  });
 };
 
 // Pagination and search functionality (placeholders)
@@ -206,7 +228,7 @@ const startEntry = computed(() => (currentPage.value - 1) * pageSize + 1);
 const endEntry = computed(() => Math.min(currentPage.value * pageSize, totalEntries.value));
 const paginatedItems = computed(() => filteredItems.value.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize));
 
-const changePage = (page) => {
+const changePage = (page: any) => {
   currentPage.value = page;
 };
 
@@ -227,4 +249,12 @@ onMounted(() => {
   resetForm();
 });
 
+// Watch for changes in the config to reinitialize the form data
+watch(
+  () => props.config.fields,
+  () => {
+    initializeFormData();
+  },
+  { deep: true }
+);
 </script>
