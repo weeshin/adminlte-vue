@@ -52,19 +52,19 @@
                     </table>
                     <template #footer>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                Showing {{ startEntry }} to {{ endEntry }} of {{ totalEntries }} entries
+                            <div>                                
+                                {{ $t('actionableDataTable.showingEntries', { startEntry: startEntry, endEntry: endEntry, totalEntries: totalEntries }) }}
                             </div>
                             <nav aria-label="Page navigation example">
                                 <ul class="pagination mb-0">
                                     <li class="page-item" :class="{ disabled: currentPage === 1 }">
-                                        <a class="page-link" href="#" @click.prevent="previousPage">Previous</a>
+                                        <a class="page-link" href="#" @click.prevent="previousPage">{{ $t('actionableDataTable.previous') }}</a>
                                     </li>
                                     <li class="page-item" v-for="page in totalPages" :key="page" :class="{ active: currentPage === page }">
                                         <a class="page-link" href="#" @click.prevent="changePage(page)">{{ page }}</a>
                                     </li>
                                     <li class="page-item" :class="{ disabled: currentPage === totalPages }">
-                                        <a class="page-link" href="#" @click.prevent="nextPage">Next</a>
+                                        <a class="page-link" href="#" @click.prevent="nextPage">{{ $t('actionableDataTable.next') }}</a>
                                     </li>
                                 </ul>
                             </nav>

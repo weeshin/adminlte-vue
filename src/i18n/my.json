@@ -12,7 +12,7 @@
         "uniqueVisitors": "Pengunjung Unik",
         "moreInfo": "Maklumat Lanjut",
         "maps": "Peta",
-        "tables": "Jadual"
+        "tables": "Jadual"        
     },
     "actionableDataTable": {
         "create": "Cipta",
@@ -21,7 +21,10 @@
         "fullname": "Nama Penuh",
         "email": "Emel",
         "roles": "Peranan",
-        "action": "Tindakan"
+        "action": "Tindakan",
+        "showingEntries": "Menunjukkan {startEntry} hingga {endEntry} daripada {totalEntries} entri",
+        "previous": "Sebelumnya",
+        "next": "Seterusnya"
     },
     "footer": {
         "copyright": "Hak Cipta",
