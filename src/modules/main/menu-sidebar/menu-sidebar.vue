@@ -99,6 +99,10 @@ const menu = [
         path: '/tables'
     },
     {
+        name: t('labels.calendars'),
+        path: '/calendars'
+    },
+    {
         name: 'Layout Options',
         children: [
             {
