@@ -27,9 +27,9 @@
                         <thead>
                             <tr>
                                 <th class="text-capitalize" v-for="(colName, index) in columnNames" :key="index">
-                                    {{ colName }}
+                                    {{ $t("actionableDataTable."+colName) }}
                                 </th>                                
-                                <th class="text-capitalize text-right">Action</th>
+                                <th class="text-capitalize text-right">{{ $t('actionableDataTable.action') }}</th>
                             </tr>
                         </thead>
                         <tbody>
