@@ -5,7 +5,30 @@
         "dashboard2": "Papan Pemuka 2",
         "blank": "Kosong",
         "home": "Rumah",
-        "contact": "Hubungi"
+        "contact": "Hubungi",
+        "newOrders": "Pesanan Baru",
+        "bounceRate": "Kadar Lantunan",
+        "userRegistrations": "Pendaftaran Pengguna",
+        "uniqueVisitors": "Pengunjung Unik",
+        "moreInfo": "Maklumat Lanjut",
+        "maps": "Peta",
+        "tables": "Jadual"        
+    },
+    "actionableDataTable": {
+        "create": "Cipta",
+        "search": "Cari",
+        "username": "Nama Pengguna",
+        "fullname": "Nama Penuh",
+        "email": "Emel",
+        "roles": "Peranan",
+        "action": "Tindakan",
+        "showingEntries": "Menunjukkan {startEntry} hingga {endEntry} daripada {totalEntries} entri",
+        "previous": "Sebelumnya",
+        "next": "Seterusnya"
+    },
+    "footer": {
+        "copyright": "Hak Cipta",
+        "version": "Versi"
     },
     "messages": {
         "passwordError": "Kata laluan anda tidak sah."

@@ -26,16 +26,19 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <search></search>
-            <messages></messages>
-            <notifications ></notifications>        
+            <!-- <search></search> -->
+            <MessageDropdown 
+                :totalMessages="messages.total" 
+                :messages="messages.messages">                
+            </MessageDropdown>
+            <!-- <notifications ></notifications>         -->
             <!--<languages-dropdown></languages-dropdown>-->
-            <user></user> 
-            <li class="nav-item">
+            <!-- <user></user>  -->
+            <!-- <li class="nav-item">
                 <button class="nav-link" @click="onToggleControlSidebar">
                     <i class="fas fa-th-large"></i>
                 </button>
-            </li>
+            </li> -->
             <fullscreen></fullscreen>
         </ul>
     </nav>
@@ -44,11 +47,12 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
 import { useStore } from 'vuex';
-import Messages from './messages.vue';
+import MessageDropdown from '@components/MessageDropdown.vue';
 import notifications from './notifications.vue';
 import User from './user.vue';
 import Search from './search.vue';
-import Fullscreen from './fullscreen.vue';
+import Fullscreen from '@components/FullscreenButton.vue';
+import axios from 'axios';
 
 const store = useStore();
 
@@ -67,7 +71,24 @@ const onToggleControlSidebar = () => {
 // const darkModeSelected = computed(() => store.getters['ui/darkModeSelected']);
 const navbarVariant = computed(() => store.getters['ui/nabarVariant']);
 
+interface Message {
+  total: string;
+  messages: any[];  
+}
+const messages = ref<Message>({
+    total: '',
+    messages: []
+});
 onMounted(async ()=> {
     headerElement.value = document.getElementById('main-header') as HTMLElement;
+
+    try {
+        const response = await axios.get('/data/messages.json');
+        console.log("messages", response.data);
+        messages.value = response.data;
+        
+    } catch(error) {
+        console.error('Error fetching users', error);
+    }
 });
 </script>

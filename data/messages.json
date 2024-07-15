@@ -1,0 +1,36 @@
+{
+    "total": "5",
+    "messages": [
+      {
+        "image": "assets/img/default-profile.png",
+        "caller": "Brad Diesel",
+        "short_message": "Call me whenever you can...",
+        "time": "4 hours ago"
+      },
+      {
+        "image": "assets/img/default-profile.png",
+        "caller": "John Doe",
+        "short_message": "Let's discuss the project.",
+        "time": "3 hours ago"
+      },
+      {
+        "image": "assets/img/default-profile.png",
+        "caller": "Jane Smith",
+        "short_message": "Meeting at 10 AM.",
+        "time": "2 hours ago"
+      },
+      {
+        "image": "assets/img/default-profile.png",
+        "caller": "Alice Johnson",
+        "short_message": "Can you send me the report?",
+        "time": "1 hour ago"
+      },
+      {
+        "image": "assets/img/default-profile.png",
+        "caller": "Mike Wilson",
+        "short_message": "Lunch at 1 PM?",
+        "time": "30 minutes ago"
+      }
+    ]
+  }
+  

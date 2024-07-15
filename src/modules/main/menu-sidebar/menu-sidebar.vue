@@ -1,7 +1,7 @@
 <template>
     <aside v-if="menu" class="main-sidebar elevation-4" :class="sidebarSkin">
         <router-link to="/" class="brand-link">
-            <pf-image
+            <image
                 src="assets/img/logo.png"
                 alt="AdminLTE Logo"
                 class="brand-image"
@@ -9,14 +9,14 @@
                 width="33"
                 rounded
                 style="opacity: 0.8"
-            ></pf-image>
+            ></image>
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </router-link>
 
         <div class="sidebar">
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
-                    <pf-image
+                    <image
                         :src="currentUser?.photoURL"
                         fallbackSrc="assets/img/default-profile.png"
                         class="img-circle"
@@ -24,7 +24,7 @@
                         width="34"
                         height="34"
                         rounded
-                    ></pf-image>
+                    ></image>
                 </div>
                 <div class="info">
                     <router-link to="/profile" class="d-block">
@@ -91,8 +91,12 @@ const menu = [
         ]
     },
     {
-        name: t('labels.blank'),
-        path: '/blank'
+        name: t('labels.maps'),
+        path: '/maps'
+    },    
+    {
+        name: t('labels.tables'),
+        path: '/tables'
     },
     {
         name: 'Layout Options',

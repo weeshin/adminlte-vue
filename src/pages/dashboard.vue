@@ -107,7 +107,7 @@
                     v-model:availableItems="availableItems" v-model:selectedItems="selectedItems"></DualListbox>
             </div>            
             <div class="col-6 col-lg-6">
-                <Card></Card>
+                <Card title="Test"></Card>
             </div>
         </div>
     </div>
@@ -121,6 +121,7 @@
 import { ref } from 'vue';
 import Card from '@/components/card.vue';
 import DualListbox from '@/components/dual-listbox.vue';
+import Map from '@components/Map.vue';
 
 
 const availableItems = ref(['Policy 1', 'Policy 2', 'Policy 3', 'Policy 4', 'Policy 5']);

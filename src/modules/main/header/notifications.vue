@@ -1,5 +1,5 @@
 <template>
-<pf-dropdown hideArrow >
+<dropdown hideArrow >
     <div slot="head">
         <i class="far fa-bell"></i>
         <span class="badge badge-warning navbar-badge">15</span>
@@ -34,7 +34,7 @@
             >labels.seeAllNotification</a
         >
     </div>
-</pf-dropdown>
+</dropdown>
 
 </template>
 
