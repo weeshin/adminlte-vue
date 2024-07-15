@@ -1,12 +1,18 @@
 import type { App } from 'vue';
-import { Card, DualListbox, Footer } from '@/components';
+import {
+    ActionableDataTable, 
+    Card, 
+    DualListbox, 
+    Footer,
+ } from '@/components';
 
 export default {
     install: (app: App) => {
+        app.component('ActionableDataTable', ActionableDataTable);
         app.component('Card', Card);
         app.component('DualListbox', DualListbox);
-        app.component('Footer');
+        app.component('Footer', Footer);
     }
 };
 
-export { Card, DualListbox, Footer }
+export { ActionableDataTable, Card, DualListbox, Footer }

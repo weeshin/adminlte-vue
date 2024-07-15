@@ -11,7 +11,20 @@
         "userRegistrations": "User Registrations",
         "uniqueVisitors": "Unique Visitors",
         "moreInfo": "More Info",
-        "maps": "Maps"
+        "maps": "Maps",
+        "tables": "Tables"        
+    },
+    "actionableDataTable": {
+        "create": "Create",
+        "search": "Search",
+        "username": "Username",
+        "fullname": "Fullname",
+        "email": "Email",
+        "roles": "Roles",
+        "action": "Action",
+        "showingEntries": "Showing {startEntry} to {endEntry} of {totalEntries} entries",
+        "previous": "Previous",
+        "next": "Next"
     },
     "footer": {
         "copyright": "Copyright",
