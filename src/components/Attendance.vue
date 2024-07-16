@@ -28,10 +28,11 @@
               <td class="fixed-cell">{{ row.title }}</td>
               <td v-for="day in daysInMonth" :key="day" class="scrollable-cell">
                 <span v-if="entryForDay(row.body, day)">
-                  {{ entryForDay(row.body, day).content }}
+                  <!-- {{ entryForDay(row.body, day).content }} -->
+                  <AttendanceCell :data="entryForDay(row.body, day).content"></AttendanceCell>
                 </span>
                 <span v-else>
-                  &nbsp; <!-- Empty space for days without content -->
+                  &nbsp;
                 </span>
               </td>
             </tr>
@@ -51,6 +52,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import Card from '@components/card.vue';
+import AttendanceCell from '@components/AttendanceCell.vue';
 
 const props = defineProps<{
   initialYear: number;
@@ -107,22 +109,14 @@ const goToCurrentMonth = () => {
   year.value = currentDate.getFullYear();
   month.value = currentDate.getMonth() + 1;
 };
-// const columns = Array.from({ length: 25 }, (_, i) => String.fromCharCode(66 + i)); // B to Z
-// const data = ref([
-//   ['Row 1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1', 'V1', 'W1', 'X1', 'Y1', 'Z1', 
-//             '1B1', '1C1', '1D1', '1E1', '1F1', '1G1', '1H1', '1I1', '1J1', '1K1', '1L1', '1M1', '1N1', '1O1', '1P1', '1Q1', '1R1', '1S1', '1T1', '1U1', '1V1', '1W1', 
-//             '1X1', '1Y1', '1Z1'],
-//   ['Row 2', 'B2', 'C2', 'D2', 'E2', 'F2', 'G2', 'H2', 'I2', 'J2', 'K2', 'L2', 'M2', 'N2', 'O2', 'P2', 'Q2', 'R2', 'S2', 'T2', 'U2', 'V2', 'W2', 'X2', 'Y2', 'Z2',
-//             'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1', 'V1', 'W1', 'X1', 'Y1', 'Z1'
-//   ],
-//   // Add more rows as needed
-// ]);
+
 </script>
 
 <style scoped>
 .excel-container {
   display: flex;
   flex-direction: column;
+  padding: 5px;
 }
 
 .header-container {
