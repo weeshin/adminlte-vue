@@ -12,7 +12,8 @@
         "uniqueVisitors": "Unique Visitors",
         "moreInfo": "More Info",
         "maps": "Maps",
-        "tables": "Tables"        
+        "tables": "Tables",
+        "calendars": "Calendars"
     },
     "actionableDataTable": {
         "create": "Create",
