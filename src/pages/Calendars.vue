@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-      <MonthlyGrid :year="2024" :month="5" :records="data" />
+      <MonthlyGrid :initial-year="2024" :initial-month="5" :records="data" />
     </div>
   </template>
   
@@ -10,7 +10,7 @@
   // Sample records
 const data = [
   { title: 'Tan Ling Kwan', body: [ { day: 1, content: 'm1 - absent' }, { day: 2, content: 'm' } ] },
-  { title: 'Mike Ross', body: [ { day: 1, content: 'm' }, { day: 12, content: 'm' }, { day: 16, content: 'm' }, { day: 28, content: 'm' } ] },
+  { title: 'Mike Ross', body: [ { day: 1, content: 'm - Late' }, { day: 12, content: 'm' }, { day: 16, content: 'm' }, { day: 28, content: 'm' } ] },
   { title: 'Jessica Pearson', body: [ { day: 3, content: 'm' }, { day: 14, content: 'm' }, { day: 15, content: 'm' } ] },
   { title: 'Harvey Specter', body: [ { day: 5, content: 'm' }, { day: 19, content: 'm' } ] },
   { title: 'Rachel Zane', body: [ { day: 7, content: 'm' }, { day: 22, content: 'm' } ] },

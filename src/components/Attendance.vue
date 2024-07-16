@@ -1,12 +1,18 @@
 <template>
   <div class="excel-container">
-    <Card title="Calendar">
-      <template #header>
+    <Card title="">
+      <template #card-tools>
         <div class="header-container">
-          <button @click="goToPreviousMonth">Previous Month</button>
           <div class="current-date">{{ currentMonthYear }}</div>
-          <button @click="goToCurrentMonth">Current Month</button>
-          <button @click="goToNextMonth">Next Month</button>
+          <div class="btn-group">
+            <button type="button" class="btn btn-primary" @click="goToPreviousMonth">
+              <i class="fa fa-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-primary" @click="goToNextMonth">
+              <i class="fa fa-chevron-right"></i>
+            </button>
+          </div>
+          <button type="button" class="btn btn-primary" @click="goToCurrentMonth">Current Month</button>          
         </div>
       </template>
       <div class="table-container">
@@ -34,7 +40,9 @@
       </div>
 
       <template #footer>
-        total records
+        <div class="footer-container">
+          Total Records: {{ totalRecords }}
+        </div>
       </template>
     </Card>
   </div>
@@ -45,22 +53,60 @@ import { ref, computed } from 'vue';
 import Card from '@components/card.vue';
 
 const props = defineProps<{
-  year: number;
-  month: number;
+  initialYear: number;
+  initialMonth: number;
   records: {
     title: string;
     body: { day: number; content: string }[];
   }[];
 }>();
 
+const year = ref(props.initialYear);
+const month = ref(props.initialMonth);
+
 const daysInMonth = computed(() => {
-  return Array.from({ length: new Date(props.year, props.month, 0).getDate() }, (_, i) => i + 1);
+  return Array.from({ length: new Date(year.value, month.value, 0).getDate() }, (_, i) => i + 1);
 });
 const entryForDay = (body: { day: number; content: string }[], day: number) => {
   return body.find(entry => entry.day === day) || null;
 };
 
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
 
+const currentMonthYear = computed(() => {
+  return `${monthNames[month.value - 1]} ${year.value}`;
+});
+
+const totalRecords = computed(() => {
+  return props.records.length;
+});
+
+const goToPreviousMonth = () => {
+  if (month.value === 1) {
+    month.value = 12;
+    year.value -= 1;
+  } else {
+    month.value -= 1;
+  }
+};
+
+const goToNextMonth = () => {
+  if (month.value === 12) {
+    month.value = 1;
+    year.value += 1;
+  } else {
+    month.value += 1;
+  }
+};
+
+const goToCurrentMonth = () => {
+  const currentDate = new Date();
+  year.value = currentDate.getFullYear();
+  month.value = currentDate.getMonth() + 1;
+};
 // const columns = Array.from({ length: 25 }, (_, i) => String.fromCharCode(66 + i)); // B to Z
 // const data = ref([
 //   ['Row 1', 'B1', 'C1', 'D1', 'E1', 'F1', 'G1', 'H1', 'I1', 'J1', 'K1', 'L1', 'M1', 'N1', 'O1', 'P1', 'Q1', 'R1', 'S1', 'T1', 'U1', 'V1', 'W1', 'X1', 'Y1', 'Z1', 
@@ -77,6 +123,19 @@ const entryForDay = (body: { day: number; content: string }[], day: number) => {
 .excel-container {
   display: flex;
   flex-direction: column;
+}
+
+.header-container {
+  display: flex;
+  justify-content: flex-end; /* Align to the right */
+  align-items: center;
+  margin-bottom: 10px;
+  gap: 10px; /* Space between elements */
+}
+
+.current-date {
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .table-container {
