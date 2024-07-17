@@ -11,8 +11,10 @@
         "userRegistrations": "用户注册",
         "uniqueVisitors": "独立访客",
         "moreInfo": "更多信息",
+        "widgets": "部件",
         "maps": "地图",
-        "tables": "表格"        
+        "tables": "表格",
+        "calendars": "日曆"
     },
     "actionableDataTable": {
         "create": "创建",
