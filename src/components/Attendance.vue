@@ -33,8 +33,7 @@
             <tr v-for="(row, rowIndex) in paginatedItems" :key="rowIndex">            
               <td class="fixed-cell">{{ row.title }}</td>
               <td v-for="day in daysInMonth" :key="day" class="scrollable-cell">
-                <span v-if="entryForDay(row.body, day)">
-                  <!-- {{ entryForDay(row.body, day).content }} -->
+                <span v-if="entryForDay(row.body, day)">                  
                   <AttendanceCell :data="entryForDay(row.body, day).content"></AttendanceCell>
                 </span>
                 <span v-else>
@@ -80,7 +79,7 @@ const props = defineProps<{
   initialMonth: number;
   records: {
     title: string;
-    body: { day: number; content: string }[];
+    body: { day: string; content: string }[];
   }[];
 }>();
 
@@ -94,13 +93,12 @@ const daysInMonth = computed(() => {
   return Array.from({ length: new Date(year.value, month.value, 0).getDate() }, (_, i) => i + 1);
 });
 
-const visibleDays = computed(() => {
-  const startIndex = (currentPage.value - 1) * pageSize;
-  return daysInMonth.value.slice(startIndex, startIndex + pageSize);
-});
-
-const entryForDay = (body: { day: number; content: string }[], day: number) => {
-  return body.find(entry => entry.day === day) || null;
+const entryForDay = (body: { day: string; content: string }[], day: number) => {
+  const formattedMonth = String(month.value).padStart(2, '0');
+  const formattedDay = String(day).padStart(2, '0');
+  const formattedDate = `${year.value}-${formattedMonth}-${formattedDay}`;
+  console.log("formattedDate "+formattedDate);
+  return body.find(entry => entry.day === formattedDate) || { content: "" };
 };
 
 const monthNames = [
