@@ -1,7 +1,7 @@
 {
 	"name": "adminlte-vue3",
 	"private": false,
-	"version": "0.1.23",
+	"version": "0.1.24",
 	"type": "module",
 	"keywords": [
 		"vue",
