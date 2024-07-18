@@ -75,16 +75,31 @@ import Card from '@components/card.vue';
 import AttendanceCell from '@components/AttendanceCell.vue';
 
 const props = defineProps<{
-  initialYear: number;
-  initialMonth: number;
+  initialYear?: number;
+  initialMonth?: number | string;
   records: {
     title: string;
     body: { day: string; content: string }[];
   }[];
 }>();
 
-const year = ref(props.initialYear);
-const month = ref(props.initialMonth);
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
+
+// Set the initial year to the provided value or to the current year if not provided
+const initialYear = props.initialYear !== undefined
+  ? props.initialYear
+  : new Date().getFullYear();
+
+// Set the initial month to the provided value or to the current month if not provided
+const initialMonth = props.initialMonth !== undefined
+  ? parseInt(props.initialMonth as string, 10)
+  : new Date().getMonth() + 1;
+
+const year = ref<number>(initialYear);
+const month = ref<number>(initialMonth);
 const searchText = ref('');
 const currentPage = ref(1);
 const pageSize = 10; // Adjust as needed
@@ -97,14 +112,10 @@ const entryForDay = (body: { day: string; content: string }[], day: number) => {
   const formattedMonth = String(month.value).padStart(2, '0');
   const formattedDay = String(day).padStart(2, '0');
   const formattedDate = `${year.value}-${formattedMonth}-${formattedDay}`;
-  console.log("formattedDate "+formattedDate);
+  
   return body.find(entry => entry.day === formattedDate) || { content: "" };
 };
 
-const monthNames = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
-];
 
 const currentMonthYear = computed(() => {
   return `${monthNames[month.value - 1]} ${year.value}`;
@@ -143,10 +154,6 @@ const previousPage = () => {
   }
 };
 
-// const visibleRecords = computed(() => {
-//   const startIndex = (currentPage.value - 1) * pageSize;
-//   return props.records.slice(startIndex, startIndex + pageSize);
-// });
 
 const goToPreviousMonth = () => {
   if (month.value === 1) {
@@ -157,13 +164,13 @@ const goToPreviousMonth = () => {
   }
 };
 
-const goToNextMonth = () => {
+const goToNextMonth = () => {  
   if (month.value === 12) {
     month.value = 1;
     year.value += 1;
   } else {
     month.value += 1;
-  }
+  }  
 };
 
 const goToCurrentMonth = () => {
