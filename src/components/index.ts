@@ -5,4 +5,4 @@ export { default as DualListbox } from './dual-listbox.vue';
 export { default as Footer } from './Footer.vue';
 
 // Export FormConfig
-export { FormConfig, FormField } from './FormConfig';
+export type { FormConfig, FormField } from './FormConfig';
