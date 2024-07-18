@@ -5,7 +5,7 @@ import {
     Card, 
     DualListbox, 
     Footer,
- } from '@/components';
+ } from './index';
 
 export default {
     install: (app: App) => {
