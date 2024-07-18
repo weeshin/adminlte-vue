@@ -16,6 +16,7 @@
 	},
 	"main": "./dist/adminlte-vue3.umd.cjs",
 	"module": "./dist/adminlte-vue3.js",
+	"types": "./dist/adminlte-vue3.d.ts",
 	"files": [
 		"dist"
 	],
