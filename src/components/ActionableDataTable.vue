@@ -20,7 +20,7 @@
                     <div class="mb-3 d-flex align-items-center justify-content-end">
                         <label for="search" class="form-label mb-0"> {{ $t('actionableDataTable.search') }}: </label>
                         <div class="ml-1">
-                            <input type="text" id="search" class="form-control" v-model="searchText" placeholder="Search roles"></input>
+                            <input type="text" id="search" class="form-control" v-model="searchText" :placeholder="$t('actionableDataTable.search')"></input>
                         </div>                            
                     </div>
                     <table class="table table-hover text-nowrap">
