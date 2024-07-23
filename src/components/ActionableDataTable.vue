@@ -23,7 +23,7 @@
                             <input type="text" id="search" class="form-control" v-model="searchText" :placeholder="$t('actionableDataTable.search')"></input>
                         </div>                            
                     </div>
-                    <table class="table table-hover text-nowrap">
+                    <table class="table table-hover text-nowrap table-bordered">
                         <thead>
                             <tr>
                                 <th class="text-capitalize" v-for="(colName, index) in columnNames" :key="index">
