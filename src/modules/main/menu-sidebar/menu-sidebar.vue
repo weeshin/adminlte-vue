@@ -89,26 +89,22 @@ const menu = [
                 path: 'dashboard2'
             }
         ]
-    },
+    }, 
     {
-        name: t('labels.maps'),
-        path: '/maps'
-    },    
-    {
-        name: t('labels.tables'),
-        path: '/tables'
-    },
-    {
-        name: 'Layout Options',
+        name: t('labels.widgets'),
         children: [
             {
-                name: 'sub-menu',
-                path: '/sub-menu-1'
+                name: t('labels.calendars'),
+                path: '/calendars'
             },
             {
-                name: 'sub-blank',
-                path: '/sub-menu-2'
-            }
+                name: t('labels.maps'),
+                path: '/maps'
+            }, 
+            {
+                name: t('labels.tables'),
+                path: '/tables'
+            },  
         ]
     }
 ];

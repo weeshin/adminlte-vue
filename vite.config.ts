@@ -10,13 +10,14 @@ export default defineConfig({
   plugins: [
     vue(),
     dts({
-      insertTypesEntry: true
+      insertTypesEntry: true,
+      // outDir: 'dist/types'
     }),
-    viteStaticCopy({
-      targets: [
-        { src: 'src/assets/scss', dest: "dist/assets" }
-      ]
-    })
+    // viteStaticCopy({
+    //   targets: [
+    //     { src: 'src/assets/scss', dest: "dist/assets" }
+    //   ]
+    // })
   ],
   resolve: {
     alias: {
@@ -35,9 +36,9 @@ export default defineConfig({
       fileName: "adminlte-vue3"
     },
     rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, "src/components/main.ts"),
-      },
+      // input: {
+      //   main: path.resolve(__dirname, "src/components/main.ts"),
+      // },
       external: ['vue'],      
       output: {
         exports: "named",
@@ -47,10 +48,10 @@ export default defineConfig({
       }
     },
   },  
-  test: {
-    globals: true,
-    environment: 'jsdom',
-    setupFiles: './tests/setup.ts',
-  },
+  // test: {
+  //   globals: true,
+  //   environment: 'jsdom',
+  //   setupFiles: './tests/setup.ts',
+  // },
   
 })

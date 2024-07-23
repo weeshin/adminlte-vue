@@ -11,8 +11,10 @@
         "userRegistrations": "User Registrations",
         "uniqueVisitors": "Unique Visitors",
         "moreInfo": "More Info",
+        "widgets": "Widgets",
         "maps": "Maps",
-        "tables": "Tables"        
+        "tables": "Tables",
+        "calendars": "Calendars"
     },
     "actionableDataTable": {
         "create": "Create",

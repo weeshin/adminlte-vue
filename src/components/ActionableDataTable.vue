@@ -43,7 +43,7 @@
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                                        @click="deleteItem(item)">
+                                        @click="onItemDelete(item)">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -137,7 +137,8 @@ const props = defineProps<{
     modalTitle: string,
     columnNames: string[],
     data: Record<string, any>[],
-    onSubmit: (data: Record<string, any>) => void
+    onSubmit: (data: Record<string, any>) => void,
+    onItemDelete: (item: any) => void
 }>();
 
 const formData = reactive<Record<string, any>>({});
@@ -196,9 +197,9 @@ const showEditModal = (item: Record<string, any>) => {
   showModal('Edit Entry');
 };
 
-const deleteItem = (item: any) => {
-  console.log('Deleting item:', item);
-};
+// const deleteItem = (item: any) => {
+//   console.log('Deleting item:', item);
+// };
 
 const resetForm = () => {
   Object.keys(formData).forEach(key => {
