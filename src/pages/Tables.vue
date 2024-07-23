@@ -9,7 +9,8 @@
                         :columnNames="columnNames"
                         :data="users"
                         :config="formConfig"
-                        :onSubmit="callback">
+                        :onSubmit="callback"
+                        :onItemDelete="deleteItem">
                     </ActionableDataTable>
                 </div>
             </div>
@@ -176,5 +177,9 @@ const formConfig: FormConfig = {
 
 const callback = (data: Record<string, any>) => {
     console.log("callback ", data);
+}
+
+const deleteItem = (item: any) => {
+    console.log("delete it", item.id);    
 }
 </script>
