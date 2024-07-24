@@ -10,7 +10,8 @@
                         :data="users"
                         :config="formConfig"
                         :onSubmit="handleOnSubmit "
-                        :onItemDelete="deleteItem">
+                        :onItemDelete="deleteItem"
+                        :onSearch="handleSearch">
                     </ActionableDataTable>
                 </div>
             </div>
@@ -184,5 +185,25 @@ const handleOnSubmit  = (data: Record<string, any>, context: any) => {
 const deleteItem = (item: any, context: any) => {
     console.log("delete it", item.id);    
     context.showToast("Delete successful");
+}
+
+const handleSearch = (searchText: string) => {
+    users.value = [
+    {
+        "id": "1",
+        "username": "ali handler",
+        "fullname": "ali bin hassan",
+        "email": "ali@knk.com.my",
+        "mobile_no": "01763231234",
+        "roles": ["1", "3"]
+    },
+    {
+        "id": "11",
+        "username": "nancy",
+        "fullname": "Nancy Gold",
+        "email": "nancy@knk.com.my",
+        "mobile_no": "017-2634567",
+        "roles": ["2"]
+    },];
 }
 </script>

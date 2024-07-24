@@ -163,7 +163,8 @@ const props = defineProps<{
     columnNames: string[],
     data: Record<string, any>[],
     onSubmit: (data: Record<string, any>, context: any) => void,
-    onItemDelete: (item: any, context: any) => void
+    onItemDelete: (item: any, context: any) => void,
+    onSearch?: (searchText: string) => void
 }>();
 
 const formData = reactive<Record<string, any>>({});
@@ -262,11 +263,16 @@ const pageSize = 10;
 const filteredItems = computed(() => {
   if (!searchText.value) {
     return props.data;
-  } else {
+  } else {    
     const lowerSearch = searchText.value.toLowerCase();
-    return props.data.filter(item =>
-      item.username.toLowerCase().includes(lowerSearch)
-    );
+    if (props.onSearch) {
+        props.onSearch(searchText.value);
+        return props.data;
+    } else {
+        return props.data.filter(item =>
+            item.username.toLowerCase().includes(lowerSearch)
+        );
+    }    
   }
 });
 
