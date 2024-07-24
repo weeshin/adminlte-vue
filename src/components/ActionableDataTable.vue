@@ -20,10 +20,10 @@
                     <div class="mb-3 d-flex align-items-center justify-content-end">
                         <label for="search" class="form-label mb-0"> {{ $t('actionableDataTable.search') }}: </label>
                         <div class="ml-1">
-                            <input type="text" id="search" class="form-control" v-model="searchText" placeholder="Search roles"></input>
+                            <input type="text" id="search" class="form-control" v-model="searchText" :placeholder="$t('actionableDataTable.search')"></input>
                         </div>                            
                     </div>
-                    <table class="table table-hover text-nowrap">
+                    <table class="table table-hover text-nowrap table-bordered">
                         <thead>
                             <tr>
                                 <th class="text-capitalize" v-for="(colName, index) in columnNames" :key="index">
@@ -43,7 +43,7 @@
                                         <i class="fas fa-edit"></i>
                                     </button>
                                     <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                                        @click="onItemDelete(item)">
+                                        @click="confirmDelete(item)">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </td>
@@ -124,6 +124,30 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" :class="{ show: isDeleteModalVisible, fade: !isDeleteModalVisible }" tabindex="-1" role="dialog" style="display: block;" v-if="isDeleteModalVisible">
+    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ $t('actionableDataTable.confirmDelete') }}</h5>
+                <button type="button" class="close" @click="hideDeleteModal">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p>{{ $t('actionableDataTable.confirmDeleteMessage') }}</p>
+                </div>
+                <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-secondary text-uppercase" @click="hideDeleteModal">
+                    {{ $t('actionableDataTable.cancel') }}
+                </button>
+                <button type="button" class="btn btn-danger text-uppercase" @click="deleteConfirmed">
+                    {{ $t('actionableDataTable.delete') }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -137,7 +161,7 @@ const props = defineProps<{
     modalTitle: string,
     columnNames: string[],
     data: Record<string, any>[],
-    onSubmit: (data: Record<string, any>) => void,
+    onSubmit: (data: Record<string, any>, context: any) => void,
     onItemDelete: (item: any) => void
 }>();
 
@@ -168,7 +192,7 @@ const getComponent = (type: string) => {
 
 
 const submitForm = () => {    
-    props.onSubmit(formData);
+    props.onSubmit(formData, { hideModal });
 };
 
 
@@ -197,14 +221,31 @@ const showEditModal = (item: Record<string, any>) => {
   showModal('Edit Entry');
 };
 
-// const deleteItem = (item: any) => {
-//   console.log('Deleting item:', item);
-// };
-
 const resetForm = () => {
   Object.keys(formData).forEach(key => {
     formData[key] = '';
   });
+};
+
+// Delete confirmation logic
+const isDeleteModalVisible = ref(false);
+const itemToDelete = ref<Record<string, any> | null>(null);
+
+const confirmDelete = (item: Record<string, any>) => {
+  itemToDelete.value = item;
+  isDeleteModalVisible.value = true;
+};
+
+const hideDeleteModal = () => {
+  isDeleteModalVisible.value = false;
+  itemToDelete.value = null;
+};
+
+const deleteConfirmed = () => {
+  if (itemToDelete.value) {
+    props.onItemDelete(itemToDelete.value);
+    hideDeleteModal();
+  }
 };
 
 // Pagination and search functionality (placeholders)

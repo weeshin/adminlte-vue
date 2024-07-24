@@ -9,7 +9,7 @@
                         :columnNames="columnNames"
                         :data="users"
                         :config="formConfig"
-                        :onSubmit="callback"
+                        :onSubmit="handleOnSubmit "
                         :onItemDelete="deleteItem">
                     </ActionableDataTable>
                 </div>
@@ -175,11 +175,14 @@ const formConfig: FormConfig = {
   ],
 };
 
-const callback = (data: Record<string, any>) => {
+const handleOnSubmit  = (data: Record<string, any>, context: any) => {
     console.log("callback ", data);
+    alert("submit successful");
+    context.hideModal();
 }
 
 const deleteItem = (item: any) => {
     console.log("delete it", item.id);    
+    alert("delete " + item.id);
 }
 </script>

@@ -26,7 +26,11 @@
         "action": "Action",
         "showingEntries": "Showing {startEntry} to {endEntry} of {totalEntries} entries",
         "previous": "Previous",
-        "next": "Next"
+        "next": "Next",
+        "confirmDelete": "Confirm Delete?",
+        "confirmDeleteMessage": "Are you sure to delete?",
+        "cancel": "Cancel",
+        "delete": "Delete"
     },
     "footer": {
         "copyright": "Copyright",
