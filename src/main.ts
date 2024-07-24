@@ -3,17 +3,17 @@ import App from './app/App.vue';
 import router from './router';
 import store from './store';
 import { i18n } from './i18n';
-import Toast, { POSITION } from 'vue-toastification';
+import Toast, { POSITION, PluginOptions } from 'vue-toastification';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-
+import "vue-toastification/dist/index.css";
 // import './style.css'
 import './index.scss'
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faEnvelope, faLock);
 
-const options = {
+const options: PluginOptions  = {
     position: POSITION.TOP_RIGHT,
     timeout: 5000,
     closeOnClick: true,
