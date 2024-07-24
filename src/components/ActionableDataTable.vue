@@ -153,6 +153,7 @@
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, defineProps, watch } from 'vue';
 import Card from '@components/card.vue';
+import { useToast } from 'vue-toastification';
 import { FormConfig, FormField } from '../components/FormConfig';
 
 const props = defineProps<{ 
@@ -162,7 +163,7 @@ const props = defineProps<{
     columnNames: string[],
     data: Record<string, any>[],
     onSubmit: (data: Record<string, any>, context: any) => void,
-    onItemDelete: (item: any) => void
+    onItemDelete: (item: any, context: any) => void
 }>();
 
 const formData = reactive<Record<string, any>>({});
@@ -190,9 +191,14 @@ const getComponent = (type: string) => {
   }
 };
 
+const toast = useToast();
+const showToast = (message: string) => {      
+      toast.success(message);      
+};
 
 const submitForm = () => {    
-    props.onSubmit(formData, { hideModal });
+    props.onSubmit(formData, { showToast });
+    hideModal();
 };
 
 
@@ -243,7 +249,7 @@ const hideDeleteModal = () => {
 
 const deleteConfirmed = () => {
   if (itemToDelete.value) {
-    props.onItemDelete(itemToDelete.value);
+    props.onItemDelete(itemToDelete.value, { showToast });
     hideDeleteModal();
   }
 };

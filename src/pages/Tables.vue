@@ -177,12 +177,12 @@ const formConfig: FormConfig = {
 
 const handleOnSubmit  = (data: Record<string, any>, context: any) => {
     console.log("callback ", data);
-    alert("submit successful");
-    context.hideModal();
+    // alert("submit successful");
+    context.showToast("Submit successful");
 }
 
-const deleteItem = (item: any) => {
+const deleteItem = (item: any, context: any) => {
     console.log("delete it", item.id);    
-    alert("delete " + item.id);
+    context.showToast("Delete successful");
 }
 </script>
