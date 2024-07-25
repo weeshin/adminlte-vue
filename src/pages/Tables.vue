@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <ActionableDataTable 
+                    <DataGrid 
                         title="Test DataTable" 
                         modalTitle="Test Form" 
                         :columnNames="columnNames"
@@ -12,7 +12,7 @@
                         :onSubmit="handleOnSubmit "
                         :onItemDelete="deleteItem"
                         :onSearch="handleSearch">
-                    </ActionableDataTable>
+                    </DataGrid>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import ActionableDataTable from '@components/ActionableDataTable.vue';
+import DataGrid from '@components/DataGrid.vue';
 import axios from 'axios';
 import { FormConfig } from '../components/FormConfig';
 

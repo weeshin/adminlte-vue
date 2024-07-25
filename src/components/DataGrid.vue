@@ -154,7 +154,7 @@
 import { ref, reactive, computed, onMounted, defineProps, watch } from 'vue';
 import Card from '@components/card.vue';
 import { useToast } from 'vue-toastification';
-import { FormConfig, FormField } from '../components/FormConfig';
+import { FormConfig, FormField } from './FormConfig';
 
 const props = defineProps<{ 
     config: FormConfig,
