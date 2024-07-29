@@ -13,30 +13,7 @@
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </router-link>
 
-        <div class="sidebar">
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <image
-                        :src="currentUser?.photoURL"
-                        fallbackSrc="assets/img/default-profile.png"
-                        class="img-circle"
-                        alt="User Image"
-                        width="34"
-                        height="34"
-                        rounded
-                    ></image>
-                </div>
-                <div class="info">
-                    <router-link to="/profile" class="d-block">
-                        {{ currentUser?.email }}
-                    </router-link>
-                </div>
-            </div>
-
-            <div class="form-inline">
-                <app-sidebar-search :menu="menu"></app-sidebar-search>
-            </div>
-
+        <div class="sidebar">                        
             <nav class="mt-2">
                 <ul
                     class="nav nav-pills nav-sidebar flex-column"
@@ -104,6 +81,10 @@ const menu = [
             {
                 name: t('labels.tables'),
                 path: '/tables'
+            },  
+            {
+                name: 'Tables 2',
+                path: '/tables2'
             },  
         ]
     }

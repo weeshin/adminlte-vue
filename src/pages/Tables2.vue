@@ -3,49 +3,43 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <NixDataGrid 
-                        :columns="columnNames"
-                        :entriesPerPage="10"
-                        :dataSource="users"
-                        :bordered="true"
-                        :pagination="true"
-                        v-slot:edit="{ row }"
-                        v-slot:delete="{ row }">      
-                        <button class="btn btn-primary text-uppercase" style="letter-spacing: 0.1em;"
-                             @click="editRow(row)"><i class="fas fa-edit"></i></button>                  
-                        <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                             @click="deleteRow(row)"><i class="fas fa-trash"></i></button>
-                    </NixDataGrid>
+                    <DataGrid 
+                        title="Test DataTable" 
+                        modalTitle="Test Form" 
+                        :columnNames="columnNames"
+                        :data="users"
+                        :config="formConfig"
+                        :onSubmit="handleOnSubmit "
+                        :onItemDelete="deleteItem"
+                        :onSearch="handleSearch">                        
+                    </DataGrid>
                 </div>
             </div>
+
         </div>
     </div>
 </template>
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
+import DataGrid from '@components/DataGrid.vue';
 import axios from 'axios';
 import { FormConfig } from '../components/FormConfig';
-import { NixDataGrid, NixColumn } from '@/components/datagrid';
 
 
 const columnNames = ref([
-    { field: "username", header: "Username", headerBold: true}, 
-    { field: "fullname", header: "Fullname"}, 
-    { field: "email", header: "Email"}, 
-    { field: "roles", header: "Roles", textAlign: 'right' },
-    { header: 'Actions', field: 'actions', headerBold: true, textAlign: 'right' }  
+    "username", "fullname", "email", "roles"
 ]);
 
-const users = ref([]);
+const users = ref([{"username": ""}]);
 
 const fetchUsers = async (searchText?: string) => {
     try {        
         const response = await axios.get('/data/users.json');
         users.value = response.data;
-        // if(searchText) {
-        //     users.value = users.value.filter(item => item.username.toLowerCase().includes(searchText))
-        // }
+        if(searchText) {
+            users.value = users.value.filter(item => item.username.toLowerCase().includes(searchText))
+        }
         console.log("fetch users total records ", users.value.length);
     } catch(error) {
         console.error('Error fetching users', error);
@@ -65,15 +59,6 @@ const formConfig: FormConfig = {
   ],
 };
 
-
-const editRow = (row: Record<string, any>) => {
-  console.log('Edit row:', row);
-};
-
-const deleteRow = (row: Record<string, any>) => {
-  console.log('Delete row:', row);
-};
-
 const handleOnSubmit  = (data: Record<string, any>, context: any) => {
     console.log("callback ", data);
     // alert("submit successful");
@@ -85,10 +70,10 @@ const deleteItem = (item: any, context: any) => {
     context.showToast("Delete successful");
 };
 
-// const handleSearch = (searchText: string) => {
-//     const lowerSearch = searchText.toLowerCase();
-//     fetchUsers(lowerSearch);
-// };
+const handleSearch = (searchText: string) => {
+    const lowerSearch = searchText.toLowerCase();
+    fetchUsers(lowerSearch);
+};
 
 onMounted(async () => {
     fetchUsers();
