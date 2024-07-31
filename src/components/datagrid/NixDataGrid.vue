@@ -73,8 +73,7 @@ const getBody = () => {
   });
   console.log(paginatedData.value);
   console.log(rows);
-
-  // return h('tbody', {}, rows);
+  
   return h('tbody', { key: currentPage.value }, rows);
 };
 
