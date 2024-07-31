@@ -85,7 +85,11 @@ const menu = [
             {
                 name: 'Tables 2',
                 path: '/tables2'
-            },  
+            },
+            {
+                name: 'Modals',
+                path: '/modals'
+            }
         ]
     }
 ];
