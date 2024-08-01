@@ -48,32 +48,35 @@
                 <input type="text" id="city" class="form-control" v-model="formData.city" />
               </div>
             </NixFormGroup>
-            <NixOptionGroup
-              :modelValue="formData.selectedOption"
-              @update:modelValue="(value: any) => formData.selectedOption = value"
-              :options="radioOptions"
-              label="Choose an option"
-              type="radio"
-              name="exampleRadio"
-              :validateField="validateSelection"
-            />
-            <NixOptionGroup
-              :modelValue="formData.selectedCheckboxes"
-              @update:modelValue="(value: any) => formData.selectedCheckboxes = value"
-              :options="checkboxOptions"
-              label="Choose multiple options"
-              type="checkbox"
-              name="exampleCheckbox"
-              :validateField="validateSelection"
-            />
 
-            <NixDropDown
-              :modelValue="formData.dropdownOption"
-              @update:modelValue="(value: any) => formData.dropdownOption = value"
-              :options="dropdownOptions"
-              label="Choose an option"
-              :validateField="validateSelection"
-            />
+            <NixFormGroup :columns="2" caption="Options components">
+              <NixOptionGroup
+                :modelValue="formData.selectedOption"
+                @update:modelValue="(value: any) => formData.selectedOption = value"
+                :options="radioOptions"
+                label="Choose an option"
+                type="radio"
+                name="exampleRadio"
+                :validateField="validateSelection"
+              />
+              <NixOptionGroup
+                :modelValue="formData.selectedCheckboxes"
+                @update:modelValue="(value: any) => formData.selectedCheckboxes = value"
+                :options="checkboxOptions"
+                label="Choose multiple options"
+                type="checkbox"
+                name="exampleCheckbox"
+                :validateField="validateSelection"
+              />
+
+              <NixDropDown
+                :modelValue="formData.dropdownOption"
+                @update:modelValue="(value: any) => formData.dropdownOption = value"
+                :options="dropdownOptions"
+                label="Choose an option"
+                :validateField="validateSelection"
+              />
+            </NixFormGroup>
             <div class="text-right">
 						  <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -113,7 +116,7 @@ const formData = ref({
 });
 
 const handleSubmit = () => {
-  console.log('Form submitted:', formData.value);
+  console.log('Form submitted:', JSON.stringify(formData.value));
   showModal.value = false;
 };
 
