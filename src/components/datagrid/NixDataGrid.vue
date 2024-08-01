@@ -1,13 +1,18 @@
 <template>
+  <div class="d-flex justify-content-end mb-2">
+    <button class="btn btn-primary" @click="showCreateModal"><i class="fas fa-plus"></i></button>
+  </div>
   <component :is="renderTable" />
+  <NixDataGridForm :formGroups="formGroups" v-if="isCreateModalVisible" :show="isCreateModalVisible" @close="hideCreateModal" @submit="handleCreate" />
 </template>
 
 <script setup lang="ts">
 import { ref, defineProps, h, getCurrentInstance, watch, computed } from 'vue';
 import NixColumnHeader from './NixColumnHeader.vue';
 import NixColumn from './NixColumn.vue';
+import NixDataGridForm from './NixDataGridForm.vue';
 import NixPagination from '@/components/pagination/NixPagination.vue';
-import { ColumnProps } from './types';
+import { ColumnProps, FormFieldProps, FormGroupProps } from './types';
 
 const props = defineProps<{
   dataSource: Record<string, any>[],
@@ -15,7 +20,8 @@ const props = defineProps<{
   loading?: boolean,
   bordered: boolean, 
   entriesPerPage: number,
-  pagination: boolean
+  pagination: boolean,  
+  formGroups: FormGroupProps[],
 }>();
 
 const slots = defineSlots();
@@ -34,6 +40,21 @@ const paginatedData = computed(() => {
 watch(() => props.dataSource, () => {
   currentPage.value = 1;
 }, { deep: true });
+
+const isCreateModalVisible = ref(false);
+
+const showCreateModal = () => {
+  isCreateModalVisible.value = true;
+};
+
+const hideCreateModal = () => {
+  isCreateModalVisible.value = false;
+};
+
+const handleCreate = (newRecord: Record<string, any>) => {
+  props.dataSource.push(newRecord);
+  hideCreateModal();
+};
 
 const getTheadTR = () => {
   const headers = props.columns.map(col => 
@@ -113,5 +134,14 @@ const renderTable = () => {
   padding: 10px;
   border: 1px solid #ddd;
   margin: 5px;
+}
+.d-flex {
+  display: flex;
+}
+.justify-content-end {
+  justify-content: flex-end;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 </style>
