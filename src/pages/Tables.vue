@@ -8,7 +8,8 @@
                         :entriesPerPage="10"
                         :dataSource="users"
                         :bordered="true"
-                        :pagination="true"
+                        :pagination="true"                        
+                        :formGroups="formFieldGroups"
                         v-slot:edit="{ row }"
                         v-slot:delete="{ row }">      
                         <button class="btn btn-primary text-uppercase" style="letter-spacing: 0.1em;"
@@ -35,6 +36,26 @@ const columnNames = ref([
     { field: "email", header: "Email"}, 
     { field: "roles", header: "Roles", textAlign: 'right' },
     { header: 'Actions', field: 'actions', headerBold: true, textAlign: 'right' }  
+]);
+
+
+const formFieldGroups = ref([
+    {
+        groupName: "Personal Information",
+        fields: [
+            { field: "username", label: "Username", type: "text" }, 
+            { field: "email", label: "Email", type: "email" }
+        ]
+    },
+    {
+        groupName: "Contact Information",
+        fields: [
+            { field: "address", label: "Address", type: "text" },
+            { field: "state", label: "State", type: "text" },
+            { field: "city", label: "City", type: "text" },
+            { field: "country", label: "Country", type: "text" }
+        ]
+    }
 ]);
 
 const users = ref([]);
@@ -74,16 +95,6 @@ const deleteRow = (row: Record<string, any>) => {
   console.log('Delete row:', row);
 };
 
-const handleOnSubmit  = (data: Record<string, any>, context: any) => {
-    console.log("callback ", data);
-    // alert("submit successful");
-    context.showToast("Submit successful");
-};
-
-const deleteItem = (item: any, context: any) => {
-    console.log("delete it", item.id);    
-    context.showToast("Delete successful");
-};
 
 // const handleSearch = (searchText: string) => {
 //     const lowerSearch = searchText.toLowerCase();
