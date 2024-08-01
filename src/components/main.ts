@@ -1,6 +1,6 @@
 import type { App } from 'vue';
 import {
-    ActionableDataTable, 
+    DataGrid, 
     Attendance,
     Card, 
     DualListbox, 
@@ -9,7 +9,7 @@ import {
 
 export default {
     install: (app: App) => {
-        app.component('ActionableDataTable', ActionableDataTable);
+        app.component('DataGrid', DataGrid);
         app.component('Attendance', Attendance);
         app.component('Card', Card);
         app.component('DualListbox', DualListbox);
@@ -17,4 +17,4 @@ export default {
     }
 };
 
-export { ActionableDataTable, Attendance, Card, DualListbox, Footer }
+export { DataGrid, Attendance, Card, DualListbox, Footer }

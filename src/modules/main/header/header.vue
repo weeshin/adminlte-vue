@@ -27,10 +27,10 @@
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <!-- <search></search> -->
-            <MessageDropdown 
+            <!-- <MessageDropdown 
                 :totalMessages="messages.total" 
                 :messages="messages.messages">                
-            </MessageDropdown>
+            </MessageDropdown> -->
             <!-- <notifications ></notifications>         -->
             <!--<languages-dropdown></languages-dropdown>-->
             <!-- <user></user>  -->
@@ -84,7 +84,7 @@ onMounted(async ()=> {
 
     try {
         const response = await axios.get('/data/messages.json');
-        console.log("messages", response.data);
+        // console.log("messages", response.data);
         messages.value = response.data;
         
     } catch(error) {

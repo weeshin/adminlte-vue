@@ -76,85 +76,43 @@
     </div>
 </section>
 
-<div class="modal fade" :class="{ show: isModalVisible, fade: !isModalVisible }" tabindex="-1" role="dialog" style="display: block;" v-if="isModalVisible">
-    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    {{ modalTitle }}
-                </h4>
-                <button type="button" class="close" @click="hideModal">
-                    <span arial-hidden=""true>&times;</span>
-                </button>
+<!-- Create/Edit Modal -->
+<Modal :title="modalTitle" :isVisible="isModalVisible" @hide="hideModal" @submit="submitForm">
+    <div class="card card-primary">
+        <form @submit.prevent="submitForm">
+            <div class="card-body">
+                <div v-for="field in config.fields" :key="field.model" class="form-group">
+                    <label :for="field.model">{{ field.label }}</label>
+                    <input v-if="field.type === 'text' || field.type === 'email' || field.type === 'password'" :type="field.type" v-model="formData[field.model]" :id="field.model" class="form-control" />
+                    <select v-if="field.type === 'select'" v-model="formData[field.model]" :id="field.model" class="form-control">
+                        <option v-for="option in field.options" :key="option.value" :value="option.value">{{ option.text }}</option>
+                    </select>
+                </div>
             </div>
-            <div class="modal-body overflow-hidden">
-                    <div class="card card-primary">
-                        <form @submit.prevent="submitForm">
-                            <div class="card-body">                                
-                                <div v-for="field in config.fields" :key="field.model" class="form-group">
-                                    <label :for="field.model" class="h4">{{ field.label }}</label>
-                                    <input
-                                        v-if="field.type === 'text' || field.type === 'email' || field.type === 'password'"
-                                        :type="field.type"
-                                        v-model="formData[field.model]"
-                                        :id="field.model"
-                                        class="form-control"
-                                    />
-                                    <select v-if="field.type === 'select'" v-model="formData[field.model]" :id="field.model" class="form-control">
-                                        <option v-for="option in field.options" :key="option.value" :value="option.value">
-                                        {{ option.text }}
-                                        </option>
-                                    </select>
-                                </div>                                 
-                            </div>
-                            <div class="modal-footer justify-content-between">
-                                <button type="button" class="btn btn-danger text-uppercase"
-                                    style="letter-spacing: 0.1em;" @click="hideModal">
-                                    Cancel 
-                                </button>
-                                <button type="submit" class="btn btn-info text-uppercase"
-                                    style="letter-spacing: 0.1em;">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-            </div>
-        </div>
+        </form>
     </div>
-</div>
+</Modal>
+
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" :class="{ show: isDeleteModalVisible, fade: !isDeleteModalVisible }" tabindex="-1" role="dialog" style="display: block;" v-if="isDeleteModalVisible">
-    <div class="modal-dialog modal-sm modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{ $t('actionableDataTable.confirmDelete') }}</h5>
-                <button type="button" class="close" @click="hideDeleteModal">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <p>{{ $t('actionableDataTable.confirmDeleteMessage') }}</p>
-                </div>
-                <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-secondary text-uppercase" @click="hideDeleteModal">
-                    {{ $t('actionableDataTable.cancel') }}
-                </button>
-                <button type="button" class="btn btn-danger text-uppercase" @click="deleteConfirmed">
-                    {{ $t('actionableDataTable.delete') }}
-                </button>
-            </div>
-        </div>
+<Modal :title="$t('actionableDataTable.confirmDelete')" :isVisible="isDeleteModalVisible" @hide="hideDeleteModal" @submit="deleteConfirmed">
+    <div>
+      <p>{{ $t('actionableDataTable.confirmDeleteMessage') }}</p>
     </div>
-</div>
+    <template #footer>
+      <button type="button" class="btn btn-secondary text-uppercase" @click="hideDeleteModal">{{ $t('actionableDataTable.cancel') }}</button>
+      <button type="button" class="btn btn-danger text-uppercase" @click="deleteConfirmed">{{ $t('actionableDataTable.delete') }}</button>
+    </template>
+</Modal>
+
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, defineProps, watch } from 'vue';
 import Card from '@components/card.vue';
+import Modal from '@components/Modal.vue';
 import { useToast } from 'vue-toastification';
-import { FormConfig, FormField } from '../components/FormConfig';
+import { FormConfig, FormField } from './FormConfig';
 
 const props = defineProps<{ 
     config: FormConfig,
@@ -257,31 +215,17 @@ const deleteConfirmed = () => {
 };
 
 // Pagination and search functionality (placeholders)
-const searchText = ref('');
 const currentPage = ref(1);
-const pageSize = 10;
+const itemsPerPage = ref(10);
 
-const filteredItems = computed(() => {
-  if (!searchText.value) {
-    return props.data;
-  } else {    
-    const lowerSearch = searchText.value.toLowerCase();
-    if (props.onSearch) {
-        props.onSearch(searchText.value);
-        return props.data;
-    } else {
-        return props.data.filter(item =>
-            item.username.toLowerCase().includes(lowerSearch)
-        );
-    }    
-  }
+const totalEntries = computed(() => props.data.length);
+const totalPages = computed(() => Math.ceil(totalEntries.value / itemsPerPage.value));
+
+const paginatedItems = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage.value;
+  const end = start + itemsPerPage.value;
+  return props.data.slice(start, end);
 });
-
-const totalEntries = computed(() => filteredItems.value.length);
-const totalPages = computed(() => Math.ceil(totalEntries.value / pageSize));
-const startEntry = computed(() => (currentPage.value - 1) * pageSize + 1);
-const endEntry = computed(() => Math.min(currentPage.value * pageSize, totalEntries.value));
-const paginatedItems = computed(() => filteredItems.value.slice((currentPage.value - 1) * pageSize, currentPage.value * pageSize));
 
 const changePage = (page: any) => {
   currentPage.value = page;
@@ -299,17 +243,27 @@ const previousPage = () => {
   }
 };
 
-// Watch for changes in props.data to reset pagination
-onMounted(() => {
-  resetForm();
-});
+const startEntry = computed(() => (currentPage.value - 1) * itemsPerPage.value + 1);
+const endEntry = computed(() => Math.min(currentPage.value * itemsPerPage.value, totalEntries.value));
 
-// Watch for changes in the config to reinitialize the form data
-watch(
-  () => props.config.fields,
-  () => {
-    initializeFormData();
-  },
-  { deep: true }
-);
+
+const searchText = ref('');
+const searchItems = () => {
+  if (props.onSearch) {
+    props.onSearch(searchText.value);
+  }
+};
+
+watch(searchText, searchItems);
+
+onMounted(() => {
+  searchItems();
+});
 </script>
+
+<style scoped>
+.card-body {
+    overflow-y: auto;
+    max-height: 60vh; /* Adjust as needed to control the scrollable area within the modal */
+}
+</style>
