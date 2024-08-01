@@ -1,8 +1,22 @@
-# Vue 3 + TypeScript + Vite
+# AdminLTE-Vue
+ADminLTE-Vue is a modern Vue 3 component library based on the AdminLTE template. It provides a set of customizable and reusable components to build beautiful and responsive admin interfaces quickly and easily.
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Features
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+- [x] DataGrid
+- [ ] Chart
+
+## Installation
+To install the **`adminlte-vue`** library, use **`pnpm`** (or your prefferred package manager):
+
+```
+pnpm add adminlte-vue
+```
+
+# License
+This project is licensed under the MIT License
 
 
-pnpm install
+---
+
+This README provides an overview of **`adminlte-vue`** project, including installation instructions, usage examples, component descriptions, and contribution guidelines. Feel free to customize it further based on your project's specific requiremetns.
