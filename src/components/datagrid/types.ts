@@ -9,3 +9,15 @@ export interface ColumnProps {
   colsMap?: Record<string, ColumnProps>,
   sort?: (col: ColumnProps) => void
 }
+
+
+export interface FormFieldProps {
+  field: string,
+  label: string,
+  type: string
+}
+
+export interface FormGroupProps {
+  groupName: string,
+  fields: FormFieldProps[]
+}
