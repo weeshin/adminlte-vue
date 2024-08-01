@@ -2,7 +2,9 @@
 ADminLTE-Vue is a modern Vue 3 component library based on the AdminLTE template. It provides a set of customizable and reusable components to build beautiful and responsive admin interfaces quickly and easily.
 
 ## Features
-* **Vue 3 Compatible**: Build with the latest Vue 3 composition API.
+
+- [x] DataGrid
+- [ ] Chart
 
 ## Installation
 To install the **`adminlte-vue`** library, use **`pnpm`** (or your prefferred package manager):
