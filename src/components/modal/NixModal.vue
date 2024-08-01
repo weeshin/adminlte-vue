@@ -26,7 +26,7 @@ const renderModal = () => {
   const modalTitle = h('div', { class: 'modal-title' }, props.title);
   const closeButton = h('button', { class: 'close', onClick: closeModal }, '×');
   const modalHeader = h('div', { class: 'modal-header' }, [modalTitle, closeButton]);
-  const modalBody = h('div', { class: 'modal-body overflow-hidden' }, hSlot(slots.default));
+  const modalBody = h('div', { class: 'modal-body overflow-hidden' }, hSlot(slots.body, slots.default));
   const modalFooter = h('div', { class: 'modal-footer justify-content-between' }, hSlot(slots.footer));
   const modalContent = h('div', { class: 'modal-content' }, [modalHeader, modalBody, modalFooter]);
   const modalDialog = h('div', { class: 'modal-dialog modal-lg modal-dialog-centered', role: 'document'}, [modalContent])
