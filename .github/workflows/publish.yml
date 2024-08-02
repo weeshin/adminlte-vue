@@ -30,6 +30,10 @@ jobs:
       - name: Build project
         run: pnpm run build
 
+      - name: Configure npm for publishing
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_SECRET_KEY }}" > ~/.npmrc
+          
       - name: Publish to npm
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }} # Use the specified secret key
