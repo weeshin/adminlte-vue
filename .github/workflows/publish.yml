@@ -33,6 +33,7 @@ jobs:
       - name: Configure npm for publishing
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_SECRET_KEY }}" > ~/.npmrc
+          echo "NPM Token: ${{ secrets.NPM_TOKEN }}" # This will print the token value
           
       - name: Publish to npm
         env:
