@@ -44,7 +44,9 @@ const formFieldGroups = ref([
         groupName: "Personal Information",
         fields: [
             { field: "username", label: "Username", type: "text" }, 
-            { field: "email", label: "Email", type: "email" }
+            { field: "email", label: "Email", type: "email" },
+            { field: "fullname", label: "Fullname", type: "text" },
+            { field: "role", label: "Role", type: "select"}
         ]
     },
     {
@@ -54,6 +56,22 @@ const formFieldGroups = ref([
             { field: "state", label: "State", type: "text" },
             { field: "city", label: "City", type: "text" },
             { field: "country", label: "Country", type: "text" }
+        ]
+    },
+    {
+        groupName: "Career",
+        fields: [
+            { field: "company", label: "Company", type: "text" },
+            { field: "startDate", label: "Start date", type: "text" },
+            { field: "endDate", label: "End date", type: "text" },
+        ]
+    },
+    {
+        groupName: "Education",
+        fields: [
+            { field: "education", label: "Education", type: "text" },
+            { field: "startDate", label: "Start date", type: "text" },
+            { field: "endDate", label: "End date", type: "text" },
         ]
     }
 ]);
