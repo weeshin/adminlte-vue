@@ -16,11 +16,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18.17.1' # Use the node version compatible with your project
+          node-version: '18.17.1' # Use the specified node version
           cache: 'pnpm'
 
-      - name: Install pnpm
-        run: npm install -g pnpm
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: '9.3.0' # Use the specified pnpm version
 
       - name: Install dependencies
         run: pnpm install
@@ -30,5 +32,5 @@ jobs:
 
       - name: Publish to npm
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }} # Use the specified secret key
         run: pnpm publish --access public
