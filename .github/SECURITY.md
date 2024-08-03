@@ -24,6 +24,6 @@ We take all security vulnerabilities seriously and will do our best to respond q
 ### After the Vulnerability is Reported
 
 We will:
-- Acknowledge receipt of your vulnerability report within 72 hours.
+- Acknowledge receipt of your vulnerability report within 24 hours.
 - Provide a timeline for fixing the vulnerability.
 - Notify you once the vulnerability is fixed and the fix is deployed.
