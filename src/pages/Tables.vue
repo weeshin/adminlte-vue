@@ -44,9 +44,24 @@ const formFieldGroups = ref([
         groupName: "Personal Information",
         fields: [
             { field: "username", label: "Username", type: "text" }, 
-            { field: "email", label: "Email", type: "email" },
+            { field: "email", label: "Email", type: "text" },
             { field: "fullname", label: "Fullname", type: "text" },
-            { field: "role", label: "Role", type: "select"}
+            { 
+                field: "role", label: "Role", type: "select", 
+                options: [
+                    { value: "role_1", label: "Role 1" },
+                    { value: "role_2", label: "Role 2" },
+                    { value: "role_3", label: "Role 3" },
+                    { value: "role_4", label: "Role 4" }
+                ]
+            },
+            {
+                field: "gender", label: "Gender", type: "radio",
+                options: [
+                    { value: "male", label: "Male" },
+                    { value: "female", label: "female" }
+                ]
+            }
         ]
     },
     {
