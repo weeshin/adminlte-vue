@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ref, defineProps, defineEmits, h, getCurrentInstance, watch } from 'vue';
 import NixModal from '@/components/modal/NixModal.vue';
-import NixTextField from '@/components/field/NixTextField.vue';
+import { NixTextField, NixDropDown, NixOptionGroup } from '@/components/field';
 import NixFormGroup from '../form/NixFormGroup.vue';
 import { FormGroupProps } from './types';
 
@@ -57,19 +57,47 @@ const renderFormBody = () => {
       caption: group.groupName
     };
 
-    return h(NixFormGroup, formGroupProps, 
-      group.fields.map(field =>{
-        const fieldProps = {
-        id: field.field,
-        modelValue: formData.value[field.field],
-        'onUpdate:modelValue': (value: any) => {
-          formData.value[field.field] = value;
-        },
-        label: field.label,
-        validateField: () => { return null }  
-      };
+  return h(NixFormGroup, formGroupProps, 
+    group.fields.map(field => {
+      console.log(field.type);
 
-      return h(NixTextField, fieldProps);
+      if (field.type === 'text') {
+        const fieldProps = {
+          id: field.field,
+          modelValue: formData.value[field.field],
+          'onUpdate:modelValue': (value: any) => {
+            formData.value[field.field] = value;
+          },
+          label: field.label,
+          validateField: () => { return null }  
+        };
+
+        return h(NixTextField, fieldProps);
+      }
+
+      if (field.type === 'radio' || field.type === 'checkbox') {
+        const optionFieldProps = {
+          modelValue: formData.value[field.field],
+          'onUpdate:modelValue': (value: any) => formData.value[field.field] = value,
+          options: field.options ?? [],
+          label: field.label,
+          type: field.type,
+          name: field.field,
+          validateField: () => null
+        };
+        return h(NixOptionGroup, optionFieldProps);
+      }
+      
+      if (field.type === 'select') {
+        const dropdownFieldProps = {
+          modelValue: formData.value[field.field],
+          'onUpdate:modelValue': (value: any) => formData.value[field.field] = value,
+          options: field.options ?? [],
+          label: field.label,
+          validateField: () => null
+        };
+        return h(NixDropDown, dropdownFieldProps);
+      }
     }));
   }));
 
