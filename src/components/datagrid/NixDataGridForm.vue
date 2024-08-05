@@ -11,19 +11,24 @@ import { FormGroupProps } from './types';
 
 const props = defineProps<{
   show: boolean;  
-  formGroups: FormGroupProps[]
+  formGroups: FormGroupProps[];
+  currentRecord: Record<string, any> | null;
 }>();
 
-const vm = getCurrentInstance();
+const emit = defineEmits(['close', 'submit']);
 const formData = ref<Record<string, any>>({});
 
 const initializeFormData = () => {
   console.log(props.formGroups);
-  props.formGroups.forEach(group => {
-    group.fields.forEach(field => {
-      formData.value[field.field] = '';
-    });    
-  });
+  if (props.currentRecord) {
+    formData.value = { ...props.currentRecord };
+  } else {
+    props.formGroups.forEach(group => {
+      group.fields.forEach(field => {
+        formData.value[field.field] = '';
+      });    
+    });
+  }
 };
 
 watch(() => props.show, (newVal) => {
@@ -34,16 +39,15 @@ watch(() => props.show, (newVal) => {
 
 
 const closeModal = () => {
-  // emit('close');
-  vm?.emit('close');
+  emit('close');  
 };
 
 const handleSubmit = () => {
   // Perform validation here
   const isValid = true; // Replace with actual validation logic
 
-  if (isValid) {
-    vm?.emit('submit', formData.value);
+  if (isValid) {    
+    emit('submit', formData.value);    
   } else {
     // Handle validation error
   }
@@ -58,8 +62,7 @@ const renderFormBody = () => {
     };
 
   return h(NixFormGroup, formGroupProps, 
-    group.fields.map(field => {
-      console.log(field.type);
+    group.fields.map(field => {      
 
       if (field.type === 'text') {
         const fieldProps = {

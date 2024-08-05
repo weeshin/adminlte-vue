@@ -11,11 +11,8 @@
                         :pagination="true"                        
                         :formGroups="formFieldGroups"
                         v-slot:edit="{ row }"
-                        v-slot:delete="{ row }">      
-                        <button class="btn btn-primary text-uppercase" style="letter-spacing: 0.1em;"
-                             @click="editRow(row)"><i class="fas fa-edit"></i></button>                  
-                        <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                             @click="deleteRow(row)"><i class="fas fa-trash"></i></button>
+                        v-slot:delete="{ row }"
+                        @formSubmit="onSubmit">
                     </NixDataGrid>
                 </div>
             </div>
@@ -133,6 +130,10 @@ const deleteRow = (row: Record<string, any>) => {
 //     const lowerSearch = searchText.toLowerCase();
 //     fetchUsers(lowerSearch);
 // };
+
+const onSubmit = (formdData: any) => {
+    console.log('Tables: form data', JSON.stringify(formdData));
+};
 
 onMounted(async () => {
     fetchUsers();
