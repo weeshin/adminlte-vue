@@ -35,6 +35,7 @@ watch(() => props.modelValue, validate);
 const onInput = (event: Event) => {
   const value = (event.target as HTMLInputElement).value;
   filterText.value = value;
+  selectedText.value = "";
 };
 
 const onSelect = (value: string) => {
@@ -59,51 +60,53 @@ const onBlur = () => {
 };
 
 const renderDropdown = () => {
-  const label = props.label ? h('label', { class: 'form-label' }, props.label) : null;
+  const label = props.label ? h('label', { class: 'form-label' }, props.label) : null;  
 
-  const selectedOption = props.options.find(option => option.value === props.modelValue);
+  const inputWrapper = h('div', { class: 'input-wrapper', style: 'position: relative;' }, [
+    h('input', {
+      type: 'text',
+      class: 'form-control',
+      value: filterText.value || props.options.find(option => option.value === selectedText.value)?.label,
+      onInput,
+      onFocus,
+      onBlur,
+      placeholder: 'Select an option',
+      style: 'border-radius: 0.25rem; padding-right: 2rem;' // add padding-right for icon space
+    }),
+    h('i', {
+      class: `fas ${showMenu.value ? 'fa-caret-up' : 'fa-caret-down'}`,
+      onClick: toggleMenu,
+      style: 'cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);'
+    })
+  ]);
 
-  const displayText = selectedOption ? selectedOption.label : 'Select an option';
+  const options = filteredOptions.value.map(option =>
+    h('li', { class: 'dropdown-item', onClick: () => onSelect(option.value) }, option.label)
+  );
 
-  const span = h('span', { class: 'input-group-text selected-text' }, displayText);
+  const dropdownMenu = h('ul', {
+    class: ['dropdown-menu', `${showMenu.value ? 'show' : ''}`],
+    style: 'width: 100%;'
+  }, options);
 
-  const input = h('input', {
-    type: 'text',
-    class: 'form-control',
-    value: filterText.value,
-    onInput,
-    onFocus,
-    onBlur
-});
+  const validationErrorNode = validationError.value
+    ? h('div', { class: 'invalid-feedback' }, validationError.value)
+    : null;
 
-const icon = h('i', {
-  class: `fas ${showMenu.value ? 'fa-caret-up' : 'fa-caret-down'}`,
-  onClick: toggleMenu,
-  style: 'cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);'
-});
+  const icon = h('i', {
+    class: `fas ${showMenu.value ? 'fa-caret-up' : 'fa-caret-down'}`,
+    onClick: toggleMenu,
+    style: 'cursor: pointer; position: absolute; right: 10px; top: 50%; transform: translateY(-50%);'
+  });
 
-const options = filteredOptions.value.map(option =>
-  h('li', { class: 'dropdown-item', onClick: () => onSelect(option.value) }, option.label)
-);
+  return h('div', { class: 'form-group position-relative' }, [
+      label,
+      inputWrapper,
+      dropdownMenu,
+      validationErrorNode
+  ]);
 
-const dropdownMenu = h('ul', { 
-  class: ['dropdown-menu', `${showMenu.value ? 'show' : ''}`],      
-}, options);
 
-const validationErrorNode = validationError.value
-  ? h('div', { class: 'invalid-feedback' }, validationError.value)
-  : null;
-
-return h('div', { class: 'form-group position-relative' }, [
-  label,
-  h('div', { class: 'input-group' }, [
-    span,
-    input,
-    icon,
-  ]),
-  dropdownMenu,
-  validationErrorNode
-]);
 };
 </script>
   

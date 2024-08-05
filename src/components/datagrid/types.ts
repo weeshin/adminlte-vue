@@ -14,7 +14,8 @@ export interface ColumnProps {
 export interface FormFieldProps {
   field: string,
   label: string,
-  type: string
+  type: string,
+  options?: any[]
 }
 
 export interface FormGroupProps {
