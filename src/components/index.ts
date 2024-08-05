@@ -4,5 +4,7 @@ export { default as Card } from './card.vue';
 export { default as DualListbox } from './dual-listbox.vue';
 export { default as Footer } from './Footer.vue';
 
+export * from './datagrid/index';
+
 // Export FormConfig
 export type { FormConfig, FormField } from './FormConfig';
