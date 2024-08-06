@@ -1,6 +1,20 @@
 <template>
-  <div class="d-flex justify-content-end mb-2">
-    <button class="btn btn-primary" @click="showModal('create')"><i class="fas fa-plus"></i></button>
+  <div class="d-flex justify-content-end align-items-center mb-2">
+    <div class="title-container">
+      <h3>{{ title }}</h3>
+    </div>
+    <div class="d-flex align-items-center">      
+      <input 
+        v-model="searchQuery" 
+        class="form-control" 
+        type="text" 
+        placeholder="Search..." 
+        @input="emitSearchQuery"
+      />
+    </div>
+    <div>
+      <button class="btn btn-primary" @click="showModal('create')"><i class="fas fa-plus"></i></button>
+    </div>
   </div>
   <component :is="renderTable" />
   <NixDataGridForm 
@@ -22,6 +36,7 @@ import NixPagination from '@/components/pagination/NixPagination.vue';
 import { ColumnProps, FormFieldProps, FormGroupProps } from './types';
 
 const props = defineProps<{
+  title: string,
   dataSource: Record<string, any>[],
   columns: ColumnProps[],
   loading?: boolean,
@@ -32,7 +47,7 @@ const props = defineProps<{
 }>();
 
 const slots = defineSlots();
-const emit = defineEmits(['formSubmit']);
+const emit = defineEmits(['formSubmit', 'searchQuery']);
 
 const currentPage = ref(1);
 const totalEntries = computed(() => props.dataSource.length);
@@ -49,6 +64,11 @@ watch(() => props.dataSource, () => {
 const isCreateModalVisible = ref(false);
 const isEditModalVisible = ref(false);
 const currentRecord = ref<Record<string, any> | null>(null);
+const searchQuery = ref('');
+
+const emitSearchQuery = () => {
+  emit('searchQuery', searchQuery.value);
+};
 
 const showModal = (type: 'create' | 'edit', record: Record<string, any> | null = null) => {
   if (type === 'create') {
@@ -197,6 +217,15 @@ const renderTable = () => {
 }
 .justify-content-end {
   justify-content: flex-end;
+}
+.align-items-center {
+  align-items: center;
+}
+.title-container {
+  flex: 1;
+}
+.mr-3 {
+  margin-right: 1rem;
 }
 .mb-2 {
   margin-bottom: 0.5rem;
