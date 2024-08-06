@@ -46,7 +46,7 @@ const formFieldGroups = ref([
             { field: "email", label: "Email", type: "text" },
             { field: "fullname", label: "Fullname", type: "text" },
             { 
-                field: "role", label: "Role", type: "select", 
+                field: "role", label: "Role", type: "checkbox", 
                 options: [
                     { value: "role_1", label: "Role 1" },
                     { value: "role_2", label: "Role 2" },
