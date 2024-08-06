@@ -30,12 +30,13 @@ const isChecked = (value: string) => {
   return Array.isArray(props.modelValue) && props.modelValue.includes(value);
 };
 
+const currentValue = Array.isArray(props.modelValue) ? [...props.modelValue] : [];
+
 const onChange = (event: Event) => {
   const value = (event.target as HTMLInputElement).value;
   if (props.type === 'radio') {
     emit('update:modelValue', value);
-  } else {
-    const currentValue = Array.isArray(props.modelValue) ? [...props.modelValue] : [];
+  } else {    
     if ((event.target as HTMLInputElement).checked) {
       currentValue.push(value);
     } else {
@@ -43,7 +44,7 @@ const onChange = (event: Event) => {
       if (index > -1) {
         currentValue.splice(index, 1);
       }
-    }
+    }    
     emit('update:modelValue', currentValue);
   }
 };
