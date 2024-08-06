@@ -1,9 +1,30 @@
 <template>
-  <div class="d-flex justify-content-end mb-2">
-    <button class="btn btn-primary" @click="showCreateModal"><i class="fas fa-plus"></i></button>
+  <div class="d-flex justify-content-end align-items-center mb-2">
+    <div class="title-container">
+      <h3>{{ title }}</h3>
+    </div>
+    <div class="d-flex align-items-center">      
+      <input 
+        v-model="searchQuery" 
+        class="form-control" 
+        type="text" 
+        placeholder="Search..." 
+        @input="emitSearchQuery"
+      />
+    </div>
+    <div>
+      <button class="btn btn-primary" @click="showModal('create')"><i class="fas fa-plus"></i></button>
+    </div>
   </div>
   <component :is="renderTable" />
-  <NixDataGridForm :formGroups="formGroups" v-if="isCreateModalVisible" :show="isCreateModalVisible" @close="hideCreateModal" @submit="handleCreate" />
+  <NixDataGridForm 
+    :formGroups="formGroups" 
+    v-if="isCreateModalVisible || isEditModalVisible" 
+    :show="isCreateModalVisible || isEditModalVisible"
+    :currentRecord="currentRecord" 
+    @close="hideModal" 
+    @submit="handleSubmit" 
+  />
 </template>
 
 <script setup lang="ts">
@@ -15,6 +36,7 @@ import NixPagination from '@/components/pagination/NixPagination.vue';
 import { ColumnProps, FormFieldProps, FormGroupProps } from './types';
 
 const props = defineProps<{
+  title: string,
   dataSource: Record<string, any>[],
   columns: ColumnProps[],
   loading?: boolean,
@@ -25,9 +47,7 @@ const props = defineProps<{
 }>();
 
 const slots = defineSlots();
-
-const vm = getCurrentInstance()
-const $q = vm?.appContext.config.globalProperties.$q;
+const emit = defineEmits(['formSubmit', 'searchQuery']);
 
 const currentPage = ref(1);
 const totalEntries = computed(() => props.dataSource.length);
@@ -42,18 +62,62 @@ watch(() => props.dataSource, () => {
 }, { deep: true });
 
 const isCreateModalVisible = ref(false);
+const isEditModalVisible = ref(false);
+const currentRecord = ref<Record<string, any> | null>(null);
+const searchQuery = ref('');
 
-const showCreateModal = () => {
-  isCreateModalVisible.value = true;
+const emitSearchQuery = () => {
+  emit('searchQuery', searchQuery.value);
 };
 
-const hideCreateModal = () => {
+const showModal = (type: 'create' | 'edit', record: Record<string, any> | null = null) => {
+  if (type === 'create') {
+    isCreateModalVisible.value = true;
+    isEditModalVisible.value = false;
+    currentRecord.value = null;
+  } else if (type === 'edit' && record) {
+    isCreateModalVisible.value = false;
+    isEditModalVisible.value = true;
+    currentRecord.value = { ...record }; // Make a copy of the record
+  }
+};
+
+const hideModal = () => {
   isCreateModalVisible.value = false;
+  isEditModalVisible.value = false;
 };
 
-const handleCreate = (newRecord: Record<string, any>) => {
-  props.dataSource.push(newRecord);
-  hideCreateModal();
+const handleSubmit = (submittedRecord: Record<string, any>) => {
+  if (isEditModalVisible.value && currentRecord.value) {
+    // Edit the existing record
+    const index = props.dataSource.findIndex(item => item.id === currentRecord.value!.id);
+    if (index !== -1) {
+      props.dataSource[index] = submittedRecord;
+    }
+  } else {
+    // Add a new record
+    props.dataSource.push(submittedRecord);
+  }
+  hideModal();
+  emit('formSubmit', submittedRecord);
+};
+
+// const showCreateModal = () => {
+//   isCreateModalVisible.value = true;
+// };
+
+// const hideCreateModal = () => {
+//   isCreateModalVisible.value = false;
+// };
+
+// const handleCreate = (newRecord: Record<string, any>) => {
+//   props.dataSource.push(newRecord);
+//   hideCreateModal();  
+//   emit('formSubmit', newRecord);
+// };
+
+const deleteItem = () => {
+
 };
 
 const getTheadTR = () => {
@@ -77,8 +141,23 @@ const getBody = () => {
           props: col
         },{
           default: () => [
-            slots.edit ? slots.edit({ row }) : null,
-            slots.delete ? slots.delete({ row }) : null
+            // slots.edit ? slots.edit({ row }) : null,
+            // slots.edit ? slots.edit({ row, onEdit: () => showModal('edit', row) }) : null,
+            // slots.delete ? slots.delete({ row }) : null
+            h('button', { 
+              class: 'btn btn-primary text-uppercase', 
+              style: 'letter-spacing: 0.1em;',  
+              onClick: () => showModal('edit', row)
+            }, [
+              h('i', {class: "fas fa-edit"})
+            ]),
+            h('button', { 
+              class: 'btn btn-danger text-uppercase', 
+              style: 'letter-spacing: 0.1em;', 
+              onClick: deleteItem 
+            }, [
+              h('i', {class: "fas fa-trash"})
+            ])            
           ]
         });
       }
@@ -92,8 +171,6 @@ const getBody = () => {
     });
     return h('tr', {}, tds);
   });
-  console.log(paginatedData.value);
-  console.log(rows);
   
   return h('tbody', { key: currentPage.value }, rows);
 };
@@ -140,6 +217,15 @@ const renderTable = () => {
 }
 .justify-content-end {
   justify-content: flex-end;
+}
+.align-items-center {
+  align-items: center;
+}
+.title-container {
+  flex: 1;
+}
+.mr-3 {
+  margin-right: 1rem;
 }
 .mb-2 {
   margin-bottom: 0.5rem;

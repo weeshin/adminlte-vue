@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col-12">
                     <NixDataGrid 
+                        title="Test Report"
                         :columns="columnNames"
                         :entriesPerPage="10"
                         :dataSource="users"
@@ -11,11 +12,9 @@
                         :pagination="true"                        
                         :formGroups="formFieldGroups"
                         v-slot:edit="{ row }"
-                        v-slot:delete="{ row }">      
-                        <button class="btn btn-primary text-uppercase" style="letter-spacing: 0.1em;"
-                             @click="editRow(row)"><i class="fas fa-edit"></i></button>                  
-                        <button class="btn btn-danger text-uppercase ml-1" style="letter-spacing: 0.1em;"
-                             @click="deleteRow(row)"><i class="fas fa-trash"></i></button>
+                        v-slot:delete="{ row }"
+                        @formSubmit="onSubmit"
+                        @searchQuery="handleSearch">
                     </NixDataGrid>
                 </div>
             </div>
@@ -129,10 +128,18 @@ const deleteRow = (row: Record<string, any>) => {
 };
 
 
-// const handleSearch = (searchText: string) => {
-//     const lowerSearch = searchText.toLowerCase();
-//     fetchUsers(lowerSearch);
-// };
+const handleSearch = (searchText: string) => {
+    console.log("handleSearch....");
+    const lowerSearch = searchText.toLowerCase();    
+    users.value = users.value.filter((v: any) => v.username.toLowerCase().includes(searchText));
+    if (searchText === '') {
+        fetchUsers(lowerSearch);
+    }
+};
+
+const onSubmit = (formdData: any) => {
+    console.log('Tables: form data', JSON.stringify(formdData));
+};
 
 onMounted(async () => {
     fetchUsers();
