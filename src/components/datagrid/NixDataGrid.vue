@@ -131,8 +131,8 @@ const getTheadTR = () => {
   return h('tr', {}, headers);  
 };
 
-const getBody = () => {  
-  const rows = paginatedData.value.map((row) => {
+const getBody = () => {    
+  const rows = paginatedData.value.map(row => {
     const tds = props.columns.map(col => {
       if (col.field === 'actions') {
         return h(NixColumn, {
@@ -169,7 +169,7 @@ const getBody = () => {
         default: () => row[col.field]
       });
     });
-    return h('tr', {}, tds);
+    return h('tr', { key: row.id }, tds);
   });
   
   return h('tbody', { key: currentPage.value }, rows);
