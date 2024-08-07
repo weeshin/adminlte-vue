@@ -132,10 +132,11 @@ const onDelete = (row: Record<string, any>) => {
 const handleSearch = (searchText: string) => {
     console.log("handleSearch....");
     const lowerSearch = searchText.toLowerCase();    
-    users.value = users.value.filter((v: any) => v.username.toLowerCase().includes(searchText));
+    users.value = users.value.filter((v: any) => v.username.toLowerCase().startsWith(searchText.toLowerCase()));
     if (searchText === '') {
         fetchUsers(lowerSearch);
     }
+    console.log(JSON.stringify(users.value));
 };
 
 const onSubmit = (formdData: any) => {
