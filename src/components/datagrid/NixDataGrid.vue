@@ -47,7 +47,7 @@ const props = defineProps<{
 }>();
 
 const slots = defineSlots();
-const emit = defineEmits(['formSubmit', 'searchQuery']);
+const emit = defineEmits(['formSubmit', 'searchQuery', 'itemDelete']);
 
 const currentPage = ref(1);
 const totalEntries = computed(() => props.dataSource.length);
@@ -116,8 +116,8 @@ const handleSubmit = (submittedRecord: Record<string, any>) => {
 //   emit('formSubmit', newRecord);
 // };
 
-const deleteItem = () => {
-
+const deleteItem = (record: Record<string, any>) => {
+  emit('itemDelete', record);
 };
 
 const getTheadTR = () => {
@@ -154,7 +154,7 @@ const getBody = () => {
             h('button', { 
               class: 'btn btn-danger text-uppercase', 
               style: 'letter-spacing: 0.1em;', 
-              onClick: deleteItem 
+              onClick: () => deleteItem(row)
             }, [
               h('i', {class: "fas fa-trash"})
             ])            

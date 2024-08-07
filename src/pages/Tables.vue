@@ -14,7 +14,8 @@
                         v-slot:edit="{ row }"
                         v-slot:delete="{ row }"
                         @formSubmit="onSubmit"
-                        @searchQuery="handleSearch">
+                        @searchQuery="handleSearch"
+                        @itemDelete="onDelete">
                     </NixDataGrid>
                 </div>
             </div>
@@ -123,7 +124,7 @@ const editRow = (row: Record<string, any>) => {
   console.log('Edit row:', row);
 };
 
-const deleteRow = (row: Record<string, any>) => {
+const onDelete = (row: Record<string, any>) => {
   console.log('Delete row:', row);
 };
 
