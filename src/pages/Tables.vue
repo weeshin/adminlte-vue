@@ -77,16 +77,16 @@ const formFieldGroups = ref([
         groupName: "Career",
         fields: [
             { field: "company", label: "Company", type: "text" },
-            { field: "startDate", label: "Start date", type: "text" },
-            { field: "endDate", label: "End date", type: "text" },
+            { field: "startDate", label: "Start date", type: "date" },
+            { field: "endDate", label: "End date", type: "month" },
         ]
     },
     {
         groupName: "Education",
         fields: [
             { field: "education", label: "Education", type: "text" },
-            { field: "startDate", label: "Start date", type: "text" },
-            { field: "endDate", label: "End date", type: "text" },
+            { field: "startDate", label: "Start date", type: "date" },
+            { field: "endDate", label: "End date", type: "date" },
         ]
     }
 ]);

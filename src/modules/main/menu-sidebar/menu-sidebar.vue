@@ -89,6 +89,10 @@ const menu = [
             {
                 name: 'Modals',
                 path: '/modals'
+            },
+            {
+                name: 'DatePickers',
+                path: 'datepickers'
             }
         ]
     }

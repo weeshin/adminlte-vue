@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ref, defineProps, defineEmits, h, getCurrentInstance, watch } from 'vue';
 import NixModal from '@/components/modal/NixModal.vue';
-import { NixTextField, NixDropDown, NixOptionGroup } from '@/components/field';
+import { NixTextField, NixDropDown, NixOptionGroup, NixDatePicker } from '@/components/field';
 import NixFormGroup from '../form/NixFormGroup.vue';
 import { FormGroupProps } from './types';
 
@@ -100,6 +100,17 @@ const renderFormBody = () => {
           validateField: () => null
         };
         return h(NixDropDown, dropdownFieldProps);
+      }
+
+      if (field.type === 'date' || field.type === 'month') {
+        const datepickerProps = {
+          modelValue: formData.value[field.field],
+          'onUpdate:modelValue': (value: any) => formData.value[field.field] = value,
+          label: field.label,
+          type: field.type
+        };
+
+        return h(NixDatePicker, datepickerProps);
       }
     }));
   }));
