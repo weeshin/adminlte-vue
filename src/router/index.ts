@@ -8,6 +8,7 @@ import Tables from '@pages/Tables.vue';
 import Tables2 from '@pages/Tables2.vue';
 import Calendars from '@pages/Calendars.vue';
 import Modals from '@pages/Modals.vue'
+import DatePickers from '@/pages/DatePickers.vue';
 
 const routes: Array<RouteRecordRaw> = [  
     {
@@ -48,6 +49,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: 'modals',
                 component: Modals
+            },
+            {
+                path: "datepickers",
+                component: DatePickers
             }
         ]
     }  
