@@ -19,25 +19,23 @@ const onChange = (event: Event) => {
 };
 
 const renderCheckbox = () => {
-  return h('div', { class: 'form-check' }, [
-    h('input', {
-      class: 'form-check-input',
-      type: 'checkbox',
-      id: props.id,
-      checked: props.modelValue,
-      onChange: onChange,
-    }),
-    h('label', { 
-      class: 'form-check-label', 
-      for: props.id 
-    }, props.label)
-  ]);
+  const checkBox = h('input', {
+    class: 'form-check-input',
+    type: 'checkbox',
+    id: props.id,
+    checked: props.modelValue,
+    onChange: onChange,
+  });
+  const label = h('label', { 
+    class: 'form-check-label', 
+    for: props.id 
+  }, props.label);
+
+  const body = [checkBox, label];
+  return h('div', { class: 'form-check' }, body);
 };
 
 </script>
 
 <style scoped>
-.form-check-input {
-  margin-right: 0.5rem;
-}
 </style>
