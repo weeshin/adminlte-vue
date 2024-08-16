@@ -47,7 +47,7 @@ const formFieldGroups = ref([
             { field: "email", label: "Email", type: "text" },
             { field: "fullname", label: "Fullname", type: "text" },
             { 
-                field: "role", label: "Role", type: "checkbox", 
+                field: "role", label: "Role", type: "checkbox-options", 
                 options: [
                     { value: "role_1", label: "Role 1" },
                     { value: "role_2", label: "Role 2" },
@@ -56,12 +56,13 @@ const formFieldGroups = ref([
                 ]
             },
             {
-                field: "gender", label: "Gender", type: "radio",
+                field: "gender", label: "Gender", type: "radio-options",
                 options: [
                     { value: "male", label: "Male" },
                     { value: "female", label: "female" }
                 ]
-            }
+            },
+            { field: "married", label: "Married", type: "checkbox" },
         ]
     },
     {

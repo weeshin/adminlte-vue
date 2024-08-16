@@ -51,23 +51,25 @@ const onChange = (event: Event) => {
 
 // Function to render the component using h()
 const renderComponent = () => {
+  const cols = props.options.map(option => 
+    h('div', { class: `col col-${12 / colCount.value}`, key: option.value }, [
+      h('input', {
+        type: props.type,
+        id: option.value,
+        name: props.name,
+        value: option.value,
+        checked: isChecked(option.value),
+        onChange,
+        class: 'form-check-input'
+      }),
+      h('label', { for: option.value, class: 'form-check-label' }, option.label)
+    ])
+  );
+
   const formGroup = h('div', { class: 'form-group' }, [
     props.label ? h('label', props.label) : null,
-    h('div', { class: 'row' }, 
-      props.options.map(option => 
-        h('div', { class: `col col-${12 / colCount.value} form-check`, key: option.value }, [
-          h('input', {
-            type: props.type,
-            id: option.value,
-            name: props.name,
-            value: option.value,
-            checked: isChecked(option.value),
-            onChange,
-            class: 'form-check-input'
-          }),
-          h('label', { for: option.value, class: 'form-check-label' }, option.label)
-        ])
-      )
+    h('div', { class: 'form-check' }, 
+      h('div', { class: 'row' }, cols)
     ),
     validationError.value ? h('div', { class: 'invalid-feedback' }, validationError.value) : null
   ]);

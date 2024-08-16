@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { ref, defineProps, defineEmits, h, getCurrentInstance, watch } from 'vue';
 import NixModal from '@/components/modal/NixModal.vue';
-import { NixTextField, NixDropDown, NixOptionGroup, NixDatePicker } from '@/components/field';
+import { NixTextField, NixDropDown, NixOptionGroup, NixDatePicker, NixCheckBox } from '@/components/field';
 import NixFormGroup from '../form/NixFormGroup.vue';
 import { FormGroupProps } from './types';
 
@@ -78,13 +78,13 @@ const renderFormBody = () => {
         return h(NixTextField, fieldProps);
       }
 
-      if (field.type === 'radio' || field.type === 'checkbox') {
+      if (field.type === 'radio-options' || field.type === 'checkbox-options') {
         const optionFieldProps = {
           modelValue: formData.value[field.field],
           'onUpdate:modelValue': (value: any) => formData.value[field.field] = value,
           options: field.options ?? [],
           label: field.label,
-          type: field.type,
+          type: (field.type === 'radio-options') ? 'radio' : 'checkbox',
           name: field.field,
           validateField: () => null
         };
@@ -111,6 +111,16 @@ const renderFormBody = () => {
         };
 
         return h(NixDatePicker, datepickerProps);
+      }
+
+      if (field.type === 'checkbox') {
+        const checkboxProps = {
+          modelValue: formData.value[field.field],
+          'onUpdate:modelValue': (value: any) => formData.value[field.field] = value,
+          label: field.label
+        };
+
+        return h(NixCheckBox, checkboxProps);
       }
     }));
   }));
