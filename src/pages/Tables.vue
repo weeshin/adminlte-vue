@@ -61,7 +61,8 @@ const formFieldGroups = ref([
                     { value: "male", label: "Male" },
                     { value: "female", label: "female" }
                 ]
-            }
+            },
+            { field: "married", label: "Married", type: "NixCheckBox" },
         ]
     },
     {
