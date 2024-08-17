@@ -7,23 +7,23 @@ import { ref, defineProps, defineEmits, h, getCurrentInstance, watch } from 'vue
 import NixModal from '@/components/modal/NixModal.vue';
 import { NixTextField, NixDropDown, NixOptionGroup, NixDatePicker, NixCheckBox } from '@/components/field';
 import NixFormGroup from '../form/NixFormGroup.vue';
-import { FormGroupProps } from './types';
+import { DataGridFormProps } from './types';
 
 const props = defineProps<{
-  show: boolean;  
-  formGroups: FormGroupProps[];
-  currentRecord: Record<string, any> | null;
+  show: boolean;    
+  currentRecord: Record<string, any> | null;  
+  formProps: DataGridFormProps;
 }>();
 
 const emit = defineEmits(['close', 'submit']);
 const formData = ref<Record<string, any>>({});
 
 const initializeFormData = () => {
-  console.log(props.formGroups);
+  console.log(props.formProps.formGroups);
   if (props.currentRecord) {
     formData.value = { ...props.currentRecord };
   } else {
-    props.formGroups.forEach(group => {
+    props.formProps.formGroups.forEach(group => {
       group.fields.forEach(field => {
         formData.value[field.field] = null;
       });    
@@ -55,7 +55,7 @@ const handleSubmit = () => {
 
 
 const renderFormBody = () => {  
-  const body = h('div', {}, props.formGroups.map(group => {
+  const body = h('div', {}, props.formProps.formGroups.map(group => {
     const formGroupProps = {
       columns: 2,
       caption: group.groupName
@@ -132,7 +132,7 @@ const renderModal = () => {
   const body = renderFormBody();
   return h(NixModal, {
     show: props.show,
-    title: "Create title",
+    title: (props.currentRecord === null) ? props.formProps['modalCreationTitle'] : props.formProps['modalUpdateTitle'],
     onClose: closeModal
   }, {
     header: () => h('h5', { class: 'modal-title' }, 'Create Record'),
