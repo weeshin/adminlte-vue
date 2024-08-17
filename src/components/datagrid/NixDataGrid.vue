@@ -17,8 +17,8 @@
     </div>
   </div>
   <component :is="renderTable" />
-  <NixDataGridForm 
-    :formGroups="formGroups" 
+  <NixDataGridForm         
+    :formProps="formProps"
     v-if="isCreateModalVisible || isEditModalVisible" 
     :show="isCreateModalVisible || isEditModalVisible"
     :currentRecord="currentRecord" 
@@ -28,22 +28,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, h, getCurrentInstance, watch, computed } from 'vue';
+import { ref, defineProps, h, watch, computed } from 'vue';
 import NixColumnHeader from './NixColumnHeader.vue';
 import NixColumn from './NixColumn.vue';
 import NixDataGridForm from './NixDataGridForm.vue';
 import NixPagination from '@/components/pagination/NixPagination.vue';
-import { ColumnProps, FormFieldProps, FormGroupProps } from './types';
+import { ColumnProps, DataGridFormProps } from './types';
 
 const props = defineProps<{
-  title: string,
+  title: string,  
   dataSource: Record<string, any>[],
   columns: ColumnProps[],
   loading?: boolean,
   bordered: boolean, 
   entriesPerPage: number,
-  pagination: boolean,  
-  formGroups: FormGroupProps[],
+  pagination: boolean,    
+  formProps: DataGridFormProps
 }>();
 
 const slots = defineSlots();
@@ -102,20 +102,6 @@ const handleSubmit = (submittedRecord: Record<string, any>) => {
   emit('formSubmit', submittedRecord);
 };
 
-// const showCreateModal = () => {
-//   isCreateModalVisible.value = true;
-// };
-
-// const hideCreateModal = () => {
-//   isCreateModalVisible.value = false;
-// };
-
-// const handleCreate = (newRecord: Record<string, any>) => {
-//   props.dataSource.push(newRecord);
-//   hideCreateModal();  
-//   emit('formSubmit', newRecord);
-// };
-
 const deleteItem = (record: Record<string, any>) => {
   emit('itemDelete', record);
 };
@@ -141,9 +127,6 @@ const getBody = () => {
           props: col
         },{
           default: () => [
-            // slots.edit ? slots.edit({ row }) : null,
-            // slots.edit ? slots.edit({ row, onEdit: () => showModal('edit', row) }) : null,
-            // slots.delete ? slots.delete({ row }) : null
             h('button', { 
               class: 'btn btn-primary text-uppercase', 
               style: 'letter-spacing: 0.1em;',  

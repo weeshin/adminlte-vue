@@ -4,13 +4,14 @@
             <div class="row">
                 <div class="col-12">
                     <NixDataGrid 
-                        title="Test Report"
+                        title="Test Report"                        
                         :columns="columnNames"
                         :entriesPerPage="10"
                         :dataSource="users"
                         :bordered="true"
                         :pagination="true"                        
                         :formGroups="formFieldGroups"
+                        :formProps="formProps"
                         v-slot:edit="{ row }"
                         v-slot:delete="{ row }"
                         @formSubmit="onSubmit"
@@ -40,7 +41,7 @@ const columnNames = ref([
 
 
 const formFieldGroups = ref([
-    {
+    {        
         groupName: "Personal Information",
         fields: [
             { field: "username", label: "Username", type: "text" }, 
@@ -92,6 +93,11 @@ const formFieldGroups = ref([
     }
 ]);
 
+const formProps = ref({
+    modalCreationTitle: "N Create form",
+    modalUpdateTitle: "N Update form",
+    formGroups: formFieldGroups
+})
 const users = ref([]);
 
 const fetchUsers = async (searchText?: string) => {
