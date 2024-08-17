@@ -93,6 +93,10 @@ const menu = [
             {
                 name: 'DatePickers',
                 path: 'datepickers'
+            },
+            {
+                name: 'Cards',
+                path: 'cards'
             }
         ]
     }
