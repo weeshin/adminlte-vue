@@ -25,7 +25,7 @@ const initializeFormData = () => {
   } else {
     props.formGroups.forEach(group => {
       group.fields.forEach(field => {
-        formData.value[field.field] = '';
+        formData.value[field.field] = null;
       });    
     });
   }
