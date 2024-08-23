@@ -12,8 +12,6 @@
                         :pagination="true"                        
                         :formGroups="formFieldGroups"
                         :formProps="formProps"
-                        v-slot:edit="{ row }"
-                        v-slot:delete="{ row }"
                         @formSubmit="onSubmit"
                         @searchQuery="handleSearch"
                         @itemDelete="onDelete">
