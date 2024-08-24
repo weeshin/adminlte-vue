@@ -206,7 +206,7 @@ const renderTable = () => {
   } else {
     const table = h('table', {
       class: props.bordered === true 
-        ? 'table table-hover text-nowrap table-bordered' : 'table table-hover text-nowrap'
+        ? 'table table-sm table-hover text-nowrap table-bordered' : 'table table-hover text-nowrap'
     }, [
       h('thead', {}, getTheadTR()),
       getBody()
