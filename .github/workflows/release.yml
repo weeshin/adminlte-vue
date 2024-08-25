@@ -27,6 +27,14 @@ jobs:
       - name: Install dependencies
         run: pnpm install      
 
+      - name: Set Git identity
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "actions@github.com"
+
+      - name: Build project
+        run: pnpm run build
+
       - name: Bump version and create a tag
         run: |
           NEW_VERSION=$(pnpm version patch)
@@ -38,10 +46,7 @@ jobs:
         run: |
           git push origin main --follow-tags
         env:
-          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
-
-      - name: Build project
-        run: pnpm run build
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}      
 
       - name: Configure npm for publishing
         run: |
