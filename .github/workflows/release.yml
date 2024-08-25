@@ -29,7 +29,7 @@ jobs:
 
       - name: Bump version and create a tag
         run: |
-          NEW_VERSION=$(npm version patch)
+          NEW_VERSION=$(pnpm version patch)
           echo "New version: $NEW_VERSION"
         env:
           GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
