@@ -1,0 +1,58 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    environment: main
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.17.1'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9.3.0' # Use the specified pnpm version
+
+      - name: Install dependencies
+        run: pnpm install      
+
+      - name: Bump version and create a tag
+        run: |
+          NEW_VERSION=$(pnpm version patch)
+          echo "New version: $NEW_VERSION"
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+      
+      - name: Push changes and tags
+        run: |
+          git push origin main --follow-tags
+        env:
+          GITHUB_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+      - name: Build project
+        run: pnpm run build
+
+      - name: Configure npm for publishing
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_SECRET_KEY }}" > ~/.npmrc
+          echo "NPM Token: ${{ secrets.NPM_SECRET_KEY }}" # This will print the token value
+          
+      - name: Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }} # Use the specified secret key
+        run: pnpm publish --access public    
+
+      # - name: Deploy Documentation
+      #   run: |
+      #     pnpm run docs:build          

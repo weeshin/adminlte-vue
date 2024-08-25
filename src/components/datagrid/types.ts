@@ -22,3 +22,9 @@ export interface FormGroupProps {
   groupName: string,
   fields: FormFieldProps[]
 }
+
+export interface DataGridFormProps {
+    modalCreationTitle: string,
+    modalUpdateTitle: string,
+    formGroups: FormGroupProps[]
+}

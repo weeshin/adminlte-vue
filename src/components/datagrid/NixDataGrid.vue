@@ -1,24 +1,9 @@
 <template>
-  <div class="d-flex justify-content-end align-items-center mb-2">
-    <div class="title-container">
-      <h3>{{ title }}</h3>
-    </div>
-    <div class="d-flex align-items-center">      
-      <input 
-        v-model="searchQuery" 
-        class="form-control" 
-        type="text" 
-        placeholder="Search..." 
-        @input="emitSearchQuery"
-      />
-    </div>
-    <div>
-      <button class="btn btn-primary" @click="showModal('create')"><i class="fas fa-plus"></i></button>
-    </div>
-  </div>
-  <component :is="renderTable" />
-  <NixDataGridForm 
-    :formGroups="formGroups" 
+  <NixCard>
+    <component :is="renderTable" />
+  </NixCard>
+  <NixDataGridForm         
+    :formProps="formProps"
     v-if="isCreateModalVisible || isEditModalVisible" 
     :show="isCreateModalVisible || isEditModalVisible"
     :currentRecord="currentRecord" 
@@ -28,22 +13,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineProps, h, getCurrentInstance, watch, computed } from 'vue';
+import { ref, defineProps, h, watch, computed, nextTick } from 'vue';
 import NixColumnHeader from './NixColumnHeader.vue';
 import NixColumn from './NixColumn.vue';
 import NixDataGridForm from './NixDataGridForm.vue';
 import NixPagination from '@/components/pagination/NixPagination.vue';
-import { ColumnProps, FormFieldProps, FormGroupProps } from './types';
+import { NixCard, NixCardHeader, NixCardFooter, NixCardBody } from '@/components/card';
+import { ColumnProps, DataGridFormProps } from './types';
 
 const props = defineProps<{
-  title: string,
+  title: string,  
   dataSource: Record<string, any>[],
   columns: ColumnProps[],
   loading?: boolean,
   bordered: boolean, 
   entriesPerPage: number,
-  pagination: boolean,  
-  formGroups: FormGroupProps[],
+  pagination: boolean,    
+  formProps: DataGridFormProps
 }>();
 
 const slots = defineSlots();
@@ -64,10 +50,19 @@ watch(() => props.dataSource, () => {
 const isCreateModalVisible = ref(false);
 const isEditModalVisible = ref(false);
 const currentRecord = ref<Record<string, any> | null>(null);
+const searchInputRef = ref<HTMLElement | null>(null);
 const searchQuery = ref('');
 
-const emitSearchQuery = () => {
-  emit('searchQuery', searchQuery.value);
+
+const emitSearchQuery = (event: any) => {
+  console.log('emitSearchQuery', searchQuery.value);
+  searchQuery.value = event.target.value;
+  
+  emit('searchQuery', event.target.value);
+  
+  nextTick(() => {
+    searchInputRef.value?.focus();  
+  });
 };
 
 const showModal = (type: 'create' | 'edit', record: Record<string, any> | null = null) => {
@@ -102,22 +97,46 @@ const handleSubmit = (submittedRecord: Record<string, any>) => {
   emit('formSubmit', submittedRecord);
 };
 
-// const showCreateModal = () => {
-//   isCreateModalVisible.value = true;
-// };
-
-// const hideCreateModal = () => {
-//   isCreateModalVisible.value = false;
-// };
-
-// const handleCreate = (newRecord: Record<string, any>) => {
-//   props.dataSource.push(newRecord);
-//   hideCreateModal();  
-//   emit('formSubmit', newRecord);
-// };
-
 const deleteItem = (record: Record<string, any>) => {
   emit('itemDelete', record);
+};
+
+const renderHeader = () => {
+  // Create the title element
+  const titleElement = h('div', { class: 'navbar-brand' }, props.title);
+
+  // Create the search input element
+  const searchInputElement = h('input', {
+    ref: searchInputRef,
+    class: 'form-control me-2',
+    type: 'text',
+    placeholder: 'Search...',
+    value: searchQuery.value,
+    onInput: emitSearchQuery, // Emit the search query on input
+  });
+
+
+  // Create the button element with an icon
+  const buttonElement = h('button', {
+    class: 'btn btn-primary',
+    onClick: () => showModal('create'), // Show modal on button click
+  }, [
+    h('i', { class: 'fas fa-plus' }) // FontAwesome icon
+  ]);
+
+  // Wrap the search input in a container
+  const searchInputContainer = h('div', { class: 'd-flex align-items-center' }, [
+    searchInputElement,
+    buttonElement
+  ]);
+
+  // Wrap everything in the main container div
+  const containerElement  = h('div', { class: 'd-flex justify-content-between align-items-center' }, [
+    titleElement,
+    searchInputContainer    
+  ]);
+
+  return h(NixCardHeader, {}, containerElement );
 };
 
 const getTheadTR = () => {
@@ -132,6 +151,7 @@ const getTheadTR = () => {
 };
 
 const getBody = () => {    
+  console.log("PaginatedData ", paginatedData.value);
   const rows = paginatedData.value.map(row => {
     const tds = props.columns.map(col => {
       if (col.field === 'actions') {
@@ -141,9 +161,6 @@ const getBody = () => {
           props: col
         },{
           default: () => [
-            // slots.edit ? slots.edit({ row }) : null,
-            // slots.edit ? slots.edit({ row, onEdit: () => showModal('edit', row) }) : null,
-            // slots.delete ? slots.delete({ row }) : null
             h('button', { 
               class: 'btn btn-primary text-uppercase', 
               style: 'letter-spacing: 0.1em;',  
@@ -177,8 +194,11 @@ const getBody = () => {
 
 const renderTable = () => {
   const child = [];
-  const data = {};
-
+  const data = {
+    key: paginatedData.value.length // Key changes when data changes
+  };
+  const header = renderHeader();
+  child.push(header);
   if (props.loading === true && slots.loading !== void 0) {
     child.push(
       slots.loading()
@@ -186,19 +206,27 @@ const renderTable = () => {
   } else {
     const table = h('table', {
       class: props.bordered === true 
-        ? 'table table-hover text-nowrap table-bordered' : 'table table-hover text-nowrap'
+        ? 'table table-sm table-hover text-nowrap table-bordered' : 'table table-hover text-nowrap'
     }, [
       h('thead', {}, getTheadTR()),
       getBody()
     ]);
-    child.push(table);
+
+    // Render the card body with the table inside
+    const cardBody = h(NixCardBody, {}, {
+      default: () => table // Pass the table as the default slot
+    });
+
+    child.push(cardBody);
     if (props.pagination) {
-      child.push(h(NixPagination, {
+      const pagination = h(NixPagination, {
         currentPage: currentPage.value,
         totalEntries: totalEntries.value,
         entriesPerPage: props.entriesPerPage,
         'onUpdate:currentPage': (page: number) => { currentPage.value = page; }
-      }));
+      });
+      const cardFooter = h(NixCardFooter, {}, pagination);
+      child.push(cardFooter);
     }
   }
 
@@ -223,6 +251,7 @@ const renderTable = () => {
 }
 .title-container {
   flex: 1;
+  text-align: 'left'
 }
 .mr-3 {
   margin-right: 1rem;

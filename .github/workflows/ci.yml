@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - dev
+      - features/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: '9.3.0' # Use the specified pnpm version
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run cypress test-components
+        run: pnpm cypress:test-components
+
+      - name: Build project
+        run: npm run build
