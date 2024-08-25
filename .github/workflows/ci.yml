@@ -31,8 +31,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      # - name: Run tests
-      #   run: pnpm test
+      - name: Run cypress test-components
+        run: pnpm cypress:test-components
 
       - name: Build project
         run: npm run build
