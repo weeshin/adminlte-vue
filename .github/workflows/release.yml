@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  release:
+    types: [created]
+  workflow_dispatch:
 
 jobs:
   release:
@@ -29,8 +32,8 @@ jobs:
 
       - name: Set Git identity
         run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "actions@github.com"
+          git config --global user.name ${{ vars.USERNAME }}
+          git config --global user.email ${{ vars.USERNAME }}
 
       - name: Build project
         run: pnpm run build
