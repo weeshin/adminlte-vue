@@ -14,7 +14,8 @@
         "widgets": "部件",
         "maps": "地图",
         "tables": "表格",
-        "calendars": "日曆"
+        "calendars": "日曆",
+        "layout": "布局"
     },
     "actionableDataTable": {
         "create": "创建",
