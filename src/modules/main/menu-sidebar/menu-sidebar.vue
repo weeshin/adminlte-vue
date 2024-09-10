@@ -99,6 +99,15 @@ const menu = [
                 path: 'cards'
             }
         ]
+    },
+    {
+        name: t('labels.layout'),
+        children: [
+            {
+                name: t('labels.layout'),
+                path: '/layout'
+            }
+        ]
     }
 ];
 
