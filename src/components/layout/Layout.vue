@@ -4,6 +4,11 @@
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
+        <li class="nav-item">
+            <button class="nav-link" role="button" @click="onToggleMenuSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+        </li>
         <li v-for="item in topbarMenuItems" class="nav-item d-none d-sm-inline-block">
           <router-link :to="item.path" class="nav-link">
             {{ item.name }}
@@ -14,7 +19,7 @@
     </nav>
 
     
-    <MenuSidebar :menu-items="menuItems" v-if="drawerVisible"/>    
+    <MenuSidebar :menu-items="menuItems" />    
     
     <!-- Main Content -->
     <div :class="['content-wrapper']">
@@ -44,12 +49,17 @@ defineProps({
 
 const drawerVisible = ref(true); // Control the visibility of the drawer
 
-// const topbarMenuItems = [
-//   {
-//     name: 'Main',
-//     path: 'dashboard'
-//   }
-// ];
+const onToggleMenuSidebar = () => {  
+  drawerVisible.value = !drawerVisible.value;
+
+  // Toggle the class on the body
+  if (drawerVisible.value) {
+    document.body.classList.remove('sidebar-collapse');
+  } else {
+    document.body.classList.add('sidebar-collapse');
+  }
+};
+
 
 </script>
 
