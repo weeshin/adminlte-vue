@@ -33,7 +33,7 @@ const props = defineProps<{
 }>();
 
 const slots = defineSlots();
-const emit = defineEmits(['formSubmit', 'searchQuery', 'itemDelete']);
+const emit = defineEmits(['formSubmit', 'searchQuery', 'itemDelete', 'handleDetail']);
 
 const currentPage = ref(1);
 const totalEntries = computed(() => props.dataSource.length);
@@ -101,6 +101,10 @@ const deleteItem = (record: Record<string, any>) => {
   emit('itemDelete', record);
 };
 
+const handleDetail = (record: Record<string, any>) => {
+  emit('handleDetail', record);
+};
+
 const renderHeader = () => {
   // Create the title element
   const titleElement = h('div', { class: 'navbar-brand' }, props.title);
@@ -160,7 +164,14 @@ const getBody = () => {
           noHover: true,
           props: col
         },{
-          default: () => [
+          default: () => [           
+            h('button', { 
+              class: 'btn btn-info text-uppercase', 
+              style: 'letter-spacing: 0.1em;',  
+              onClick: () => handleDetail(row)
+            }, [
+              h('i', {class: "fas fa-align-justify"})
+            ]),
             h('button', { 
               class: 'btn btn-primary text-uppercase', 
               style: 'letter-spacing: 0.1em;',  
