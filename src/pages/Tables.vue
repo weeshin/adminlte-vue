@@ -14,7 +14,8 @@
                         :formProps="formProps"
                         @formSubmit="onSubmit"
                         @searchQuery="handleSearch"
-                        @itemDelete="onDelete">
+                        @itemDelete="onDelete"
+                        @handleDetail="handleDetail">
                     </NixDataGrid>
                 </div>
             </div>
@@ -146,6 +147,10 @@ const handleSearch = (searchText: string) => {
 
 const onSubmit = (formdData: any) => {
     console.log('Tables: form data', JSON.stringify(formdData));
+};
+
+const handleDetail = (row: Record<string, any>) => {
+    console.log("Detail " +JSON.stringify(row));
 };
 
 onMounted(async () => {
