@@ -1,0 +1,1 @@
+export { default as NixChart } from './NixChart.vue';

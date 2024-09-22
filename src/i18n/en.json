@@ -15,7 +15,8 @@
         "maps": "Maps",
         "tables": "Tables",
         "calendars": "Calendars",
-        "layout": "Layout"
+        "layout": "Layout",
+        "charts": "Charts"
     },
     "actionableDataTable": {
         "create": "Create",
