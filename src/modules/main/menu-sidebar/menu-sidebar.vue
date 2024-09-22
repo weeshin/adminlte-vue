@@ -97,6 +97,10 @@ const menu = [
             {
                 name: 'Cards',
                 path: 'cards'
+            },
+            {
+                name: t('labels.charts'),
+                path: 'charts'
             }
         ]
     },
