@@ -15,7 +15,8 @@
         "maps": "地图",
         "tables": "表格",
         "calendars": "日曆",
-        "layout": "布局"
+        "layout": "布局",
+        "charts": "图表"
     },
     "actionableDataTable": {
         "create": "创建",
