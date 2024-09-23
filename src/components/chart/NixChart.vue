@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <canvas :id="props.id"  width="200" height="100"></canvas>
-  </div>
+  <NixCard>
+    <canvas :id="props.id" :width=width :height=height></canvas>
+  </NixCard>
 </template>
 
 
 <script setup lang="ts">
 import { onMounted, defineProps } from 'vue';
 import { Chart, registerables, ChartType, ChartData, ChartOptions } from 'chart.js';
+import NixCard from '../card/NixCard.vue';
 
 const props = defineProps<{
   id: string,
   type?: ChartType,
   options?: ChartOptions,
-  data: ChartData
+  data: ChartData,
+  width: string,
+  height: string
 }>();
 
 // Register all components including scales
@@ -32,8 +35,8 @@ onMounted(() => {
 </script>
 
 <style scoped>
-canvas {
+canvas {  
   max-width: 100%;
-  max-height: 400px;
+  max-height: 100%;
 }
 </style>

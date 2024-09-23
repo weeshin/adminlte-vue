@@ -1,33 +1,49 @@
 <template>
-
+<section class="content">
   <h1>Charts</h1>
-  <NixChart id="lineChart" 
-            type="line"
-            :data="lineData"
-            :options="options">        
-  </NixChart>
-
-  <NixChart id="barChart" 
+  <div class="row">
+    <div class="col-lg-3 col-6">            
+      <NixChart id="lineChart" 
+                type="line"
+                :data="lineData"
+                :options="options"                
+                :height="400">        
+      </NixChart>
+    </div>
+    <div class="col-lg-3 col-6">      
+      <NixChart id="barChart" 
             type="bar" 
             :data="barData"
             :options="options">        
-  </NixChart>
+      </NixChart>      
+    </div>
+    <div class="col-lg-3 col-6">      
+      <NixChart id="pieChart" 
+          type="pie" 
+          :data="doughnutData"
+          :options="options">        
+      </NixChart>      
+    </div> 
+    <div class="col-lg-3 col-6">      
+      <NixChart id="doughnutChart" 
+          type="doughnut" 
+          :data="doughnutData">        
+      </NixChart>              
+    </div>
+  </div>
 
-  <NixChart id="pieChart" 
-            type="pie" 
-            :data="doughnutData"
-            :options="options">        
-  </NixChart>
+</section>
 
-  <NixChart id="doughnutChart" 
-            type="doughnut" 
-            :data="doughnutData">        
-  </NixChart>
+
+
+
+
 </template>
 
 <script setup>
 import { ref } from 'vue';
 import NixChart from '@/components/chart/NixChart.vue';
+import NixCard from '@/components/card/NixCard.vue';
 
 const lineData = {
   labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
