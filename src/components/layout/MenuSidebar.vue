@@ -13,7 +13,8 @@
 
 <script setup lang="ts">
 import MenuItem from '@/components/layout/MenuItem.vue';
-import { computed, defineProps } from 'vue';
+import { computed, defineProps, defineExpose } from 'vue';
+
 
 defineProps({
   menuItems: {
@@ -24,4 +25,36 @@ defineProps({
 
 
 const sidebarSkin = computed(() => 'sidebar-dark-primary');
+
+const onCollapse = () => {
+  document.body.classList.add('sidebar-collapse');
+};
+
+const offCollapse = () => {
+  document.body.classList.remove('sidebar-collapse');
+};
+
+const onShow = () => {  
+  document.body.classList.add('sidebar-open');  
+};
+
+const onHide = () => {  
+  document.body.classList.remove('sidebar-open');
+};
+
+// Use expose() to make onShow accessible to the parent component
+defineExpose({
+  onShow, onHide, onCollapse, offCollapse
+});
 </script>
+
+<style scoped>
+/* Ensures the sidebar has a visible outline when focused */
+.main-sidebar {
+  outline: none;
+}
+
+.main-sidebar:focus {
+  outline: 2px solid rgba(75, 192, 192, 0.5);
+}
+</style>
