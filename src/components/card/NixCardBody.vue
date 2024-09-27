@@ -9,6 +9,6 @@ import { hSlot } from '@/utils/render';
 const slots = defineSlots();
 
 const render = () => {
-  return h('div', { class: 'card-body' }, hSlot(slots.default))
+  return h('div', { class: 'card-body table-responsive' }, hSlot(slots.default))
 };
 </script>
