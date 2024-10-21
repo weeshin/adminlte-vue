@@ -85,6 +85,10 @@ const menu = [
             {
                 name: t('labels.charts'),
                 path: 'charts'
+            },
+            {
+              name: 'Typography',
+              path: 'typography'
             }
         ]
     },

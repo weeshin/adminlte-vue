@@ -1,0 +1,1 @@
+export { default as NixCodeBlock } from './NixCodeBlock.vue'

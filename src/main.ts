@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import "vue-toastification/dist/index.css";
 // import './style.css'
 import './index.scss'
+import 'prismjs/themes/prism.css';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faEnvelope, faLock);
