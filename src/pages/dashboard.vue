@@ -107,7 +107,36 @@
                     v-model:availableItems="availableItems" v-model:selectedItems="selectedItems"></DualListbox>
             </div>            
             <div class="col-6 col-lg-6">
-                <Card title="Test"></Card>
+                <Card title="Test">
+                    <NixList :items="productList">
+                        <!-- Custom content for each list item -->
+                        <template v-slot:default="{ item }">
+                            <li class="item">
+                                <div class="product-img">
+                                    <img :src="item.image" :alt="item.title" class="img-size-50" />
+                                </div>
+                                <div class="product-info">
+                                    <a href="javascript:void(0)" class="product-title">
+                                        {{ item.title }}
+                                        <span class="badge" :class="'badge-' + item.badgeType + ' float-right'">
+                                        {{ item.price }}
+                                        </span>
+                                    </a>
+                                    <span class="product-description">
+                                        {{ item.description }}
+                                    </span>
+                                    <!-- Custom content you want to add in the slot -->
+                                    <div class="custom-extra-info">
+                                        <strong>Custom Info:</strong> This is some extra information.
+                                    </div>
+                                    <div class="custom-extra-info">
+                                        <strong>Job Info:</strong> By Nick
+                                    </div>                                
+                                </div>
+                            </li>
+                        </template>
+                    </NixList>
+                </Card>
             </div>
         </div>
     </div>
@@ -122,8 +151,39 @@ import { ref } from 'vue';
 import Card from '@/components/card.vue';
 import DualListbox from '@/components/dual-listbox.vue';
 import Map from '@components/Map.vue';
+import NixList from '@/components/list/NixList.vue';
 
 
 const availableItems = ref(['Policy 1', 'Policy 2', 'Policy 3', 'Policy 4', 'Policy 5']);
 const selectedItems = ref(['Policy 6', 'Policy 7', 'Policy 8']);
+const productList = [
+  {
+    title: "Samsung TV",
+    price: "$1800",
+    description: "Samsung 32\" 1080p 60Hz LED Smart HDTV.",
+    badgeType: "warning",
+    image: "/assets/img/default-150x150.png",
+  },
+  {
+    title: "Bicycle",
+    price: "$700",
+    description: "26\" Mongoose Dolomite Men's 7-speed, Navy Blue.",
+    badgeType: "info",
+    image: "/assets/img/default-150x150.png",
+  },
+  {
+    title: "Xbox One",
+    price: "$350",
+    description: "Xbox One Console Bundle with Halo Master Chief Collection.",
+    badgeType: "danger",
+    image: "/assets/img/default-150x150.png",
+  },
+  {
+    title: "PlayStation 4",
+    price: "$399",
+    description: "PlayStation 4 500GB Console (PS4)",
+    badgeType: "success",
+    image: "/assets/img/default-150x150.png",
+  },
+];
 </script>

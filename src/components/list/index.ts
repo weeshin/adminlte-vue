@@ -1,0 +1,1 @@
+export { default as NixList } from './NixList.vue';
