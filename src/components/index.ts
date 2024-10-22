@@ -7,6 +7,7 @@ export { default as Footer } from './Footer.vue';
 export * from './datagrid/index';
 export * from './layout/index';
 export * from './chart/index';
+export * from './list/index';
 
 // Export FormConfig
 export type { FormConfig, FormField } from './FormConfig';
