@@ -16,7 +16,8 @@
         "tables": "Tables",
         "calendars": "Calendars",
         "layout": "Layout",
-        "charts": "Charts"
+        "charts": "Charts",
+        "buttons": "Buttons"
     },
     "actionableDataTable": {
         "create": "Create",

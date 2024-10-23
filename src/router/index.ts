@@ -12,6 +12,7 @@ import DatePickers from '@/pages/DatePickers.vue';
 import Cards from '@/pages/Cards.vue';
 import LayoutPage from '@/pages/LayoutPage.vue';
 import Charts from '@/pages/Charts.vue';
+import Buttons from '@pages/Buttons.vue';
 
 const routes: Array<RouteRecordRaw> = [  
     {
@@ -64,6 +65,10 @@ const routes: Array<RouteRecordRaw> = [
             {
                 path: '/charts',
                 component: Charts
+            },
+            {
+                path: '/buttons',
+                component: Buttons
             }
         ],        
     } ,
